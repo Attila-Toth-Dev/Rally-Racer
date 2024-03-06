@@ -26,7 +26,7 @@ namespace Tools
 
 		private void Start() => cameraPos = GetComponent<Transform>();
 
-		private void LateUpdate()
+		private void FixedUpdate()
 		{
 			// Check for valid target
 			if(targetPos != null)

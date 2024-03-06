@@ -3,13 +3,6 @@ using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public enum DriveTrain
-{
-    FWD,
-    RWD,
-    AWD
-}
-
 public class CarController : MonoBehaviour
 {
     [Header("Car Controller Objects")]
@@ -17,39 +10,40 @@ public class CarController : MonoBehaviour
     public Transform carNormal;
     public Rigidbody carRb;
 
-    [Header("Car Properties")]
+    [Header("Car Settings")]
     public float topSpeed;
     public float accelAmount;
     public float brakeAmount;
     public float steering;
 
-    [SerializeField] private DriveTrain driveTrain;
-
-    [Header("Physics Properties")]
-    [SerializeField] private float gravity = 9.82f;
-    [SerializeField] private float gravityMultiplier;
+    [Header("Turbo Settings")] 
+    public float turboPower;
+    public float turboDuration;
     
+    [Header("Physics Settings")]
+    [SerializeField] private float gravity;
+    [SerializeField] private float gravityMultiplier;
     [SerializeField] private LayerMask layerMask;
 
     [Header("Model Parts")]
-    private Transform FL_Wheel;
-    private Transform FR_Wheel;
-    
-    private Transform BL_Wheel;
-    private Transform BR_Wheel;
+    [SerializeField] private Transform flWheel;
+    [SerializeField] private Transform frWheel;
+    [SerializeField] private Transform blWheel;
+    [SerializeField] private Transform brWheel;
 
     [Header("Input Actions")]
     [SerializeField] private InputActionReference moveAction;
     [SerializeField] private InputActionReference steerAction;
+    [SerializeField] private InputActionReference driftAction;
+    [SerializeField] private InputActionReference turboAction;
 
     [Header("Debugging Tools")]
     [SerializeField] private float rayLength = 1f;
     [SerializeField, ReadOnly] private float move;
     [SerializeField, ReadOnly] private float steer;
     [SerializeField, ReadOnly] private bool isGrounded;
-    [SerializeField, ReadOnly] private float currentSpeed;
     
-    private float speed; 
+    private float speed, currentSpeed; 
     private float rotate, currentRotate;
 
     private Quaternion normalPosition;
@@ -63,11 +57,11 @@ public class CarController : MonoBehaviour
 
         // Follow Collider
         transform.position = carRb.transform.position - new Vector3(0, 0.55f, 0);
-
+        
         // Accelerate
-        if(move is < 0 or > 0)
+        if(move is < 0 or > 0) 
             speed = topSpeed * move;
-
+        
         // Steer
         if (steer != 0)
         {
@@ -78,6 +72,7 @@ public class CarController : MonoBehaviour
         }
         else Steer(0, 0);
 
+        // Current Speed and Rotate
         currentSpeed = Mathf.SmoothStep(currentSpeed, speed, Time.deltaTime * accelAmount); speed = 0f;
         currentRotate = Mathf.Lerp(currentRotate, rotate, Time.deltaTime * brakeAmount); rotate = 0f;
     }
@@ -110,7 +105,7 @@ public class CarController : MonoBehaviour
         rotate = (steering * _direction) * _amount;
 
         // Wheel Turning Animations
-        switch (_direction)
+        /*switch (_direction)
         {
             case -1:
                 FL_Wheel.localEulerAngles = new Vector3(-180, steering * -1, 0);
@@ -126,7 +121,7 @@ public class CarController : MonoBehaviour
                 FL_Wheel.localEulerAngles = new Vector3(-180, steering * 0, 0);
                 FR_Wheel.localEulerAngles = new Vector3(0, steering * 0, 0);
                 break;
-        }
+        }*/
     }
 
     private void Move()
@@ -137,12 +132,12 @@ public class CarController : MonoBehaviour
         
         // Gravity & Drag
         carRb.AddForce(Vector3.down * (gravity * gravityMultiplier), ForceMode.Acceleration);
-
-        switch(driveTrain)
-        {
-            case DriveTrain.AWD:
-                
-        }
+        
+        flWheel.Rotate(carRb.velocity.magnitude, 0, 0);
+        frWheel.Rotate(carRb.velocity.magnitude, 0, 0);
+        
+        blWheel.Rotate(carRb.velocity.magnitude, 0, 0);
+        brWheel.Rotate(carRb.velocity.magnitude, 0, 0);
     }
 
     private void GetInputs()
@@ -156,17 +151,20 @@ public class CarController : MonoBehaviour
     {
         moveAction.action.Enable();
         steerAction.action.Enable();
+        driftAction.action.Enable();
+        turboAction.action.Enable();
     }
 
     private void OnDisable()
     {
         moveAction.action.Disable();
         steerAction.action.Disable();
+        driftAction.action.Disable();
+        turboAction.action.Disable();
     }
 
     private void OnDrawGizmos()
     {
-        // Draw Ray-cast of Grounding Ray for car
         Gizmos.color = Color.red;
         Gizmos.DrawLine(transform.position + (transform.up * 0.1f), transform.position - (transform.up * rayLength));
     }
