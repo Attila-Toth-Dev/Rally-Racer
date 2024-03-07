@@ -5,7 +5,6 @@ using NaughtyAttributes;
 using System;
 
 using UnityEngine;
-using UnityEngine.Serialization;
 
 using Random = UnityEngine.Random;
 
@@ -14,8 +13,8 @@ namespace Tools
 	public class TerrainGenerator : MonoBehaviour
 	{
 		[Header("Terrain Sizing")]
-		[SerializeField, Range(1, 256)] private int xWidth;
-		[SerializeField, Range(1, 256)] private int zWidth;
+		[SerializeField, Range(1, 512)] private int xWidth;
+		[SerializeField, Range(1, 512)] private int zWidth;
 		[SerializeField] private int height = 20;
 
 		[Header("Generation Settings")]
