@@ -19,10 +19,8 @@ public class CarController : MonoBehaviour
     [Header("Turbo Settings")] 
     public float turboPower;
     public float turboDuration;
-    
+
     [Header("Physics Settings")]
-    [SerializeField] private float gravity;
-    [SerializeField] private float gravityMultiplier;
     [SerializeField] private LayerMask layerMask;
 
     [Header("Model Parts")]
@@ -80,6 +78,18 @@ public class CarController : MonoBehaviour
     private void FixedUpdate()
     {
         // Ground Detection
+        GroundDetection();
+        
+        // Moving
+        Move();
+
+        // Steering
+        transform.eulerAngles = Vector3.Lerp(transform.eulerAngles, new Vector3(0, transform.eulerAngles.y + currentRotate, 0), Time.deltaTime * 5f);
+    }
+
+    private void GroundDetection()
+    {
+        // Ground Detection
         if (Physics.Raycast(transform.position + (transform.up * 0.1f), Vector3.down, out RaycastHit hitNear, rayLength, layerMask))
         {
             // Normal Rotation
@@ -92,17 +102,14 @@ public class CarController : MonoBehaviour
             carNormal.Rotate(normalPosition.x, normalPosition.y, normalPosition.z);
             isGrounded = false;
         }
-
-        // Moving
-        Move();
-
-        // Steering
-        transform.eulerAngles = Vector3.Lerp(transform.eulerAngles, new Vector3(0, transform.eulerAngles.y + currentRotate, 0), Time.deltaTime * 5f);
     }
 
     private void Steer(int _direction, float _amount)
     {
-        rotate = (steering * _direction) * _amount;
+        if(isGrounded)
+            rotate = (steering * _direction) * _amount;
+        else
+            rotate = 0;
 
         // Wheel Turning Animations
         /*switch (_direction)
@@ -127,11 +134,10 @@ public class CarController : MonoBehaviour
     private void Move()
     {
         // Forward Acceleration
-        if(Physics.Raycast(transform.position + (transform.up * 0.1f), Vector3.down, rayLength, layerMask))
+        if(Physics.Raycast(transform.position + (transform.up * 0.1f), Vector3.down, rayLength, layerMask) && isGrounded)
             carRb.AddForce(carBody.transform.forward * (currentSpeed), ForceMode.Acceleration);
-        
-        // Gravity & Drag
-        carRb.AddForce(Vector3.down * (gravity * gravityMultiplier), ForceMode.Acceleration);
+        else
+            carRb.AddForce(carBody.transform.forward * carRb.velocity.magnitude, ForceMode.Acceleration);
         
         flWheel.Rotate(carRb.velocity.magnitude, 0, 0);
         frWheel.Rotate(carRb.velocity.magnitude, 0, 0);

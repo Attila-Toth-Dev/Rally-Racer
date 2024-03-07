@@ -14,8 +14,13 @@ public class CarGaugeUI : MonoBehaviour
 
 	private void Update()
 	{
+		speedometer.text = SetTextData();
+	}
+
+	private string SetTextData()
+	{
 		float speedVal = car.carRb.velocity.magnitude;
-		float rounded = (float) (Math.Round(speedVal, 3));
-		speedometer.text = $"{(rounded * 5).ToString()}km/h";
+		
+		return $"{((int)speedVal * 5).ToString()}km/h";
 	}
 }
