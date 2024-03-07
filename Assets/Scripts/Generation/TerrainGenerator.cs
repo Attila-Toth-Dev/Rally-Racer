@@ -1,30 +1,39 @@
-﻿using NaughtyAttributes;
+﻿using Generation;
+
+using NaughtyAttributes;
+
+using System;
 
 using UnityEngine;
+using UnityEngine.Serialization;
+
+using Random = UnityEngine.Random;
 
 namespace Tools
 {
 	public class TerrainGenerator : MonoBehaviour
 	{
 		[Header("Terrain Sizing")]
-		[SerializeField] private int xWidth = 256;
-		[SerializeField] private int zWidth = 256;
+		[SerializeField, Range(1, 256)] private int xWidth;
+		[SerializeField, Range(1, 256)] private int zWidth;
 		[SerializeField] private int height = 20;
 
 		[Header("Generation Settings")]
-		[SerializeField] private float scale = 20;
-		[SerializeField] private float offsetX = 100;
-		[SerializeField] private float offsetY = 100;
+		[SerializeField] private float noiseScale = 20;
 
-		[Header("Debugging Tools")]
+		[SerializeField] private int octaves;
+		[Range(0, 1), SerializeField] private float persistence;
+		[SerializeField] private float lacunarity;
+
+		[Header("Noise Seed")]
+		[SerializeField] private int seed;
+		[SerializeField] private Vector2 offset;
+
+		[Header("Debugging Tools")] public bool autoUpdate;
 		[SerializeField] private bool isTerrainMoving = false;
 		[SerializeField, EnableIf("isTerrainMoving")] private float offsetTime = 5f;
 
-		private void Start()
-		{
-			offsetX = Random.Range(0f, 1000f);
-			offsetY = Random.Range(0f, 1000f);
-		}
+		private void Start() => offset = new Vector2(Random.Range(0f, 1000f), Random.Range(0f, 1000f));
 
 		private void Update()
 		{
@@ -33,41 +42,30 @@ namespace Tools
 
 			if(isTerrainMoving)
 			{
-				offsetX += Time.deltaTime * offsetTime;
-				offsetY += Time.deltaTime * offsetTime;
+				offset.x += Time.deltaTime * offsetTime;
+				offset.y += Time.deltaTime * offsetTime;
 			}
 		}
 
-		private TerrainData GenerateTerrain(TerrainData _terrainData)
+		public TerrainData GenerateTerrain(TerrainData _terrainData)
 		{
 			_terrainData.heightmapResolution = xWidth + 1;
 
 			_terrainData.size = new Vector3(xWidth, height, zWidth);
-			_terrainData.SetHeights(0, 0, GenerateHeights());
+			_terrainData.SetHeights(0, 0, Noise.GenerateNoiseMap(xWidth, zWidth, seed, noiseScale, octaves, persistence, lacunarity, offset));
 
 			return _terrainData;
 		}
 
-		private float[,] GenerateHeights()
+		private void OnValidate()
 		{
-			float[,] heights = new float[xWidth, zWidth];
-			for(int x = 0; x < xWidth; x++)
-			{
-				for(int z = 0; z < zWidth; z++)
-				{
-					heights[x, z] = CalculateHeight(x, z);
-				}
-			}
+			// Reset lacunarity value
+			if(lacunarity < 1)
+				lacunarity = 1;
 
-			return heights;
-		}
-
-		private float CalculateHeight(int _x, int _z)
-		{
-			float xCoord = (float) _x / xWidth * scale + offsetX;
-			float yCoord = (float) _z / zWidth * scale + offsetY;
-
-			return Mathf.PerlinNoise(xCoord, yCoord);
+			// Reset octaves value
+			if(octaves < 0)
+				octaves = 0;
 		}
 	}
 }
