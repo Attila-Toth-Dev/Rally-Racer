@@ -139,11 +139,11 @@ public class CarController : MonoBehaviour
         else
             carRb.AddForce(carBody.transform.forward * carRb.velocity.magnitude, ForceMode.Acceleration);
         
-        flWheel.Rotate(carRb.velocity.magnitude, 0, 0);
+        /*flWheel.Rotate(carRb.velocity.magnitude, 0, 0);
         frWheel.Rotate(carRb.velocity.magnitude, 0, 0);
         
         blWheel.Rotate(carRb.velocity.magnitude, 0, 0);
-        brWheel.Rotate(carRb.velocity.magnitude, 0, 0);
+        brWheel.Rotate(carRb.velocity.magnitude, 0, 0);*/
     }
 
     private void GetInputs()
