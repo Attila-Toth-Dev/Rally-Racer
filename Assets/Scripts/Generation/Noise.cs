@@ -9,9 +9,9 @@ namespace Generation
 		/// <param name="_mapHeight">The height of the set map</param>
 		/// <param name="_seed">The seeded value of the map.</param>
 		/// <param name="_scale">The scale of which the noise if produced.</param>
-		/// <param name="_octaves"></param>
+		/// <param name="_octaves">The number of loops that make the code run, making for finer detail.</param>
 		/// <param name="_persistence"></param>
-		/// <param name="_lacunarity"></param>
+		/// <param name="_lacunarity">Determines the change in frequency between octaves. Smaller values result in coarser noise, finer results in more uniform noise. Default is 2</param>
 		/// <param name="_offset">The offset of the noise, being used to move across noise values.</param>
 		public static float[,] GenerateNoiseMap(int _mapWidth, int _mapHeight, int _seed, float _scale, 
 		                                        int _octaves, float _persistence, float _lacunarity, Vector2 _offset)
