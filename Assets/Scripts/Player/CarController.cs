@@ -1,8 +1,6 @@
 using NaughtyAttributes;
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -27,21 +25,18 @@ public class CarController : MonoBehaviour
     public List<Wheel> wheels;
 
     [Header("Car Settings")]
-    [SerializeField] float topSpeed;
-    [SerializeField] float accelAmount;
-    [SerializeField] float brakeAmount;
+    [SerializeField] private float topSpeed;
+    [SerializeField] private float accelAmount;
+    [SerializeField] private float brakeAmount;
 
     [Header("Car Control")]
-    [SerializeField] float turnSensitivity;
-    [SerializeField] float maxSteerAngle;
-    [SerializeField] Vector3 centerOfMass;
+    [SerializeField] private float turnSensitivity;
+    [SerializeField] private float maxSteerAngle;
+    [SerializeField] private Vector3 centerOfMass;
 
     [Header("Turbo Settings")] 
-    [SerializeField] float turboPower;
-    [SerializeField] float turboDuration;
-
-    [Header("Physics Settings")]
-    [SerializeField] private LayerMask layerMask;
+    [SerializeField] private float turboPower;
+    [SerializeField] private float turboDuration;
 
     [Header("Input Actions")]
     [SerializeField] private InputActionReference moveAction;
@@ -50,10 +45,8 @@ public class CarController : MonoBehaviour
     [SerializeField] private InputActionReference turboAction;
 
     [Header("Debugging Tools")]
-    [SerializeField] private float rayLength = 1f;
     [SerializeField, ReadOnly] private float moveFloat;
     [SerializeField, ReadOnly] private float steerFloat;
-    [SerializeField, ReadOnly] private bool isGrounded;
     
     private float speed; 
     private float rotate;
@@ -80,23 +73,6 @@ public class CarController : MonoBehaviour
         Brake();
     }
 
-    private void GroundDetection()
-    {
-        // Ground Detection
-        if (Physics.Raycast(transform.position + -transform.up, Vector3.down, out RaycastHit hitNear, rayLength, layerMask))
-        {
-            // Normal Rotation
-            //carNormal.up = Vector3.Lerp(carNormal.up, hitNear.normal, Time.deltaTime * 8.0f);
-            //carNormal.Rotate(0, transform.eulerAngles.y, 0);
-            isGrounded = true;
-        }
-        else
-        {
-            //carNormal.Rotate(normalPosition.x, normalPosition.y, normalPosition.z);
-            isGrounded = false;
-        }
-    }
-
     private void Move()
     {
         foreach (Wheel wheel in wheels)
@@ -111,8 +87,8 @@ public class CarController : MonoBehaviour
         {
             if(wheel.axleOfWheel == Axle.Front)
             {
-                float steerangle = steerFloat * turnSensitivity * maxSteerAngle;
-                wheel.wheelCollider.steerAngle = Mathf.Lerp(wheel.wheelCollider.steerAngle, steerangle, 0.6f);
+                float steerAngle = steerFloat * turnSensitivity * maxSteerAngle;
+                wheel.wheelCollider.steerAngle = Mathf.Lerp(wheel.wheelCollider.steerAngle, steerAngle, 0.6f);
             }
         }
     }
@@ -141,10 +117,7 @@ public class CarController : MonoBehaviour
     {
         foreach (Wheel wheel in wheels)
         {
-            Quaternion rot;
-            Vector3 pos;
-
-            wheel.wheelCollider.GetWorldPose(out pos, out rot);
+            wheel.wheelCollider.GetWorldPose(out Vector3 pos, out Quaternion rot);
             wheel.wheelGameObject.transform.position = pos;
             wheel.wheelGameObject.transform.rotation = rot;
         }
