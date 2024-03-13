@@ -76,6 +76,8 @@ public class CarController : MonoBehaviour
         // Movement
         Move();
         Steer();
+
+        Brake();
     }
 
     private void GroundDetection()
@@ -112,6 +114,26 @@ public class CarController : MonoBehaviour
                 float steerangle = steerFloat * turnSensitivity * maxSteerAngle;
                 wheel.wheelCollider.steerAngle = Mathf.Lerp(wheel.wheelCollider.steerAngle, steerangle, 0.6f);
             }
+        }
+    }
+
+    private void Brake()
+    {
+        if(moveFloat < 0)
+        {
+            foreach (Wheel wheel in wheels)
+            {
+                if(wheel.axleOfWheel == Axle.Front)
+                    wheel.wheelCollider.brakeTorque = 500 * brakeAmount * Time.deltaTime;
+
+                if (wheel.axleOfWheel == Axle.Rear)
+                    wheel.wheelCollider.brakeTorque = 300 * brakeAmount * Time.deltaTime;
+            }
+        }
+        else
+        {
+            foreach (Wheel wheel in wheels)
+                wheel.wheelCollider.brakeTorque = 0;
         }
     }
 
