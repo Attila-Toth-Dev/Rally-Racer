@@ -1,5 +1,3 @@
-using System;
-
 using TMPro;
 
 using UnityEngine;
@@ -14,13 +12,6 @@ public class CarGaugeUI : MonoBehaviour
 
 	private void Update()
 	{
-		speedometer.text = SetTextData();
-	}
-
-	private string SetTextData()
-	{
-		float speedVal = car.carRb.velocity.magnitude;
-		
-		return $"{((int)speedVal * 5).ToString()}km/h";
+		speedometer.text = $"{(int)car.currentSpeed}km/h";;
 	}
 }

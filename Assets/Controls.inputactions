@@ -33,9 +33,18 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Turbo",
+                    "name": "Gear Shift",
                     "type": "Button",
-                    "id": "f7142f5d-7412-49e9-8647-29017277b843",
+                    "id": "02124df4-823c-405f-8913-84864876643d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Clutch",
+                    "type": "Button",
+                    "id": "2664c425-5969-4f99-9b19-144b268810ee",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -187,13 +196,46 @@
                     "isPartOfComposite": false
                 },
                 {
+                    "name": "1D Axis",
+                    "id": "2d0bdfb5-a0d9-4579-9921-88d2790c054e",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Gear Shift",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "ef394d79-496f-4919-985d-dfd8543933e1",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Gear Shift",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "62da6af8-16ff-4dbe-9103-1c94b44946f3",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Gear Shift",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
                     "name": "",
-                    "id": "4f0bf468-c336-45d0-8786-c215c9b682f2",
+                    "id": "d5402c2b-b232-45e3-852c-0921fb6f1aa4",
                     "path": "<Keyboard>/leftShift",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Turbo",
+                    "action": "Clutch",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

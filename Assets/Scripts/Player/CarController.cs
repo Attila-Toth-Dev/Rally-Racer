@@ -1,17 +1,31 @@
 using NaughtyAttributes;
+
 using System;
 using System.Collections.Generic;
+using System.Numerics;
+
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
-public enum Axle
+using Quaternion = UnityEngine.Quaternion;
+using Vector3 = UnityEngine.Vector3;
+
+internal enum Drivetrain
+{
+    Awd,
+    Rwd,
+    Fwd
+}
+
+internal enum Axle
 {
     Front,
     Rear
 }
 
 [Serializable]
-public struct Wheel
+internal struct Wheel
 {
     public GameObject wheelGameObject;
     public WheelCollider wheelCollider;
@@ -20,64 +34,78 @@ public struct Wheel
 
 public class CarController : MonoBehaviour
 {
-    [Header("Car Controller Objects")]
+    [Header("Controller Objects")]
     public Rigidbody carRb;
-    public List<Wheel> wheels;
+    [SerializeField] private List<Wheel> wheels;
 
-    [Header("Car Settings")]
-    [SerializeField] private float topSpeed;
-    [SerializeField] private float accelAmount;
-    [SerializeField] private float brakeAmount;
+    [Header("Engine Settings")]
+    [SerializeField] private float enginePower = 350;
 
-    [Header("Car Control")]
-    [SerializeField] private float turnSensitivity;
-    [SerializeField] private float maxSteerAngle;
-    [SerializeField] private Vector3 centerOfMass;
-
-    [Header("Turbo Settings")] 
-    [SerializeField] private float turboPower;
-    [SerializeField] private float turboDuration;
+    [Header("Handling Settings")]
+    [SerializeField] private Drivetrain vehicleDrivetrain;
+    [SerializeField] private AnimationCurve steeringCurve;
+    [SerializeField] private float brakePower;
+    
+    [Header("Transmission Settings")]
 
     [Header("Input Actions")]
-    [SerializeField] private InputActionReference moveAction;
+    [SerializeField] private InputActionReference accelAction;
     [SerializeField] private InputActionReference steerAction;
-    [SerializeField] private InputActionReference driftAction;
-    [SerializeField] private InputActionReference turboAction;
+    [SerializeField] private InputActionReference handBrakeAction;
+    [SerializeField] private InputActionReference shiftAction;
+    [SerializeField] private InputActionReference clutchAction;
 
     [Header("Debugging Tools")]
-    [SerializeField, ReadOnly] private float moveFloat;
-    [SerializeField, ReadOnly] private float steerFloat;
-    
-    private float speed; 
-    private float rotate;
+    [ReadOnly] public float currentSpeed;
+    [SerializeField, ReadOnly] private float accelInputFloat;
+    [SerializeField, ReadOnly] private float brakeInputFloat;
+    [SerializeField, ReadOnly] private float steerInputFloat;
+    [SerializeField, ReadOnly] private float handBrakeInput;
+    [SerializeField, ReadOnly] private float shiftInputFloat;
+    [SerializeField, ReadOnly] private float clutchInputFloat;
 
-    private void Start()
-    {
-        carRb.centerOfMass = centerOfMass;
-    }
+    private float slipAngle;
+    private Vector3 centerOfMass;
+    
+    private void Start() => carRb.centerOfMass = centerOfMass;
 
     private void Update()
     {
         // Update Inputs
         GetInputs();
-
+        
+        // Animations
         AnimateWheels();
+        
+        // Get Current Vehicle Speed
+        currentSpeed = carRb.velocity.magnitude * 3.6f;
     }
 
-    private void LateUpdate()
+    private void FixedUpdate()
     {
         // Movement
         Move();
+        
+        // Handling
         Steer();
-
+        
+        // Braking
         Brake();
+        HandBrake();
     }
 
     private void Move()
     {
         foreach (Wheel wheel in wheels)
         {
-            wheel.wheelCollider.motorTorque = moveFloat * topSpeed * accelAmount * Time.deltaTime;
+            if(vehicleDrivetrain == Drivetrain.Awd)
+                wheel.wheelCollider.motorTorque = accelInputFloat * (enginePower / 2);
+
+            if(wheel.axleOfWheel == Axle.Rear && vehicleDrivetrain == Drivetrain.Rwd)
+                wheel.wheelCollider.motorTorque = accelInputFloat * (enginePower);
+
+            if(wheel.axleOfWheel == Axle.Front && vehicleDrivetrain == Drivetrain.Fwd)
+                wheel.wheelCollider.motorTorque = accelInputFloat * (enginePower);
         }
     }
 
@@ -87,29 +115,38 @@ public class CarController : MonoBehaviour
         {
             if(wheel.axleOfWheel == Axle.Front)
             {
-                float steerAngle = steerFloat * turnSensitivity * maxSteerAngle;
-                wheel.wheelCollider.steerAngle = Mathf.Lerp(wheel.wheelCollider.steerAngle, steerAngle, 0.6f);
+                float steerAngle = steerInputFloat * steeringCurve.Evaluate(currentSpeed);
+                
+                // Counter Steering
+                steerAngle += Vector3.SignedAngle(transform.forward, carRb.velocity + transform.forward, Vector3.up);
+                steerAngle = Mathf.Clamp(steerAngle, -90f, 90f);
+                
+                wheel.wheelCollider.steerAngle = steerAngle;
+            }
+        }
+    }
+
+    private void HandBrake()
+    {
+        if(handBrakeInput > 0)
+        {
+            foreach(Wheel wheel in wheels)
+            {
+                if(wheel.axleOfWheel == Axle.Rear)
+                    wheel.wheelCollider.brakeTorque = brakePower;
             }
         }
     }
 
     private void Brake()
     {
-        if(moveFloat < 0)
+        foreach(Wheel wheel in wheels)
         {
-            foreach (Wheel wheel in wheels)
-            {
-                if(wheel.axleOfWheel == Axle.Front)
-                    wheel.wheelCollider.brakeTorque = 500 * brakeAmount * Time.deltaTime;
+            if(wheel.axleOfWheel == Axle.Front)
+                wheel.wheelCollider.brakeTorque = brakeInputFloat * brakePower * 0.7f;
 
-                if (wheel.axleOfWheel == Axle.Rear)
-                    wheel.wheelCollider.brakeTorque = 300 * brakeAmount * Time.deltaTime;
-            }
-        }
-        else
-        {
-            foreach (Wheel wheel in wheels)
-                wheel.wheelCollider.brakeTorque = 0;
+            if(wheel.axleOfWheel == Axle.Rear)
+                wheel.wheelCollider.brakeTorque = brakeInputFloat * brakePower * 0.3f;
         }
     }
 
@@ -125,24 +162,46 @@ public class CarController : MonoBehaviour
 
     private void GetInputs()
     {
-        // Read Player Input values
-        moveFloat = moveAction.action.ReadValue<float>();
-        steerFloat = steerAction.action.ReadValue<float>();
-    }
+        // Gets the active input from the player keypress
+        accelInputFloat = accelAction.action.ReadValue<float>();
+        steerInputFloat = steerAction.action.ReadValue<float>();
+        handBrakeInput = handBrakeAction.action.ReadValue<float>();
+        shiftInputFloat = shiftAction.action.ReadValue<float>();
+        clutchInputFloat = clutchAction.action.ReadValue<float>();
+        
+        // Gets the input of the braking motion from
+        // from the acceleration input. Then allows the player
+        // to reverse
+        slipAngle = Vector3.Angle(transform.forward, carRb.velocity - transform.forward);
+        if(slipAngle < 120f)
+        {
+            if(accelInputFloat < 0)
+            {
+                brakeInputFloat = Mathf.Abs(accelInputFloat);
+                accelInputFloat = 0;
+            }
+            else
+                brakeInputFloat = 0;
+        }
+        else
+            brakeInputFloat = 0;
+    }   
 
     private void OnEnable()
     {
-        moveAction.action.Enable();
+        accelAction.action.Enable();
         steerAction.action.Enable();
-        driftAction.action.Enable();
-        turboAction.action.Enable();
+        handBrakeAction.action.Enable();
+        shiftAction.action.Enable();
+        clutchAction.action.Enable();
     }
 
     private void OnDisable()
     {
-        moveAction.action.Disable();
+        accelAction.action.Disable();
         steerAction.action.Disable();
-        driftAction.action.Disable();
-        turboAction.action.Disable();
+        handBrakeAction.action.Disable();
+        shiftAction.action.Disable();
+        clutchAction.action.Disable();
     }
 }
