@@ -42,8 +42,8 @@ WheelCollider:
   m_Center: {x: 0, y: 0.15, z: 0}
   m_Radius: 0.3
   m_SuspensionSpring:
-    spring: 35000
-    damper: 4500
+    spring: 40000
+    damper: 2500
     targetPosition: 0.5
   m_SuspensionDistance: 0.4
   m_ForceAppPointDistance: 0
@@ -488,8 +488,8 @@ WheelCollider:
   m_Center: {x: 0, y: 0.15, z: 0}
   m_Radius: 0.3
   m_SuspensionSpring:
-    spring: 35000
-    damper: 4500
+    spring: 40000
+    damper: 2500
     targetPosition: 0.5
   m_SuspensionDistance: 0.4
   m_ForceAppPointDistance: 0
@@ -550,8 +550,8 @@ WheelCollider:
   m_Center: {x: 0, y: 0.15, z: 0}
   m_Radius: 0.3
   m_SuspensionSpring:
-    spring: 35000
-    damper: 4500
+    spring: 40000
+    damper: 2500
     targetPosition: 0.5
   m_SuspensionDistance: 0.4
   m_ForceAppPointDistance: 0
@@ -631,64 +631,110 @@ MonoBehaviour:
   - wheelGameObject: {fileID: 3515996584039379409}
     wheelCollider: {fileID: 2930323203048832408}
     axleOfWheel: 1
-  enginePower:
+  torqueCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
       value: 100
-      inSlope: 0
-      outSlope: 0
+      inSlope: 0.67592293
+      outSlope: 0.67592293
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0
+      outWeight: 0.005919958
     - serializedVersion: 3
-      time: 339.75208
-      value: 363.33386
-      inSlope: 2.1337192
-      outSlope: 2.1337192
+      time: 243.54077
+      value: 283.62476
+      inSlope: 0.082632475
+      outSlope: 0.082632475
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.089648284
-      outWeight: 0.33333334
+      inWeight: 0.33333334
+      outWeight: 0.06077265
     - serializedVersion: 3
-      time: 900.8711
-      value: 98.67932
-      inSlope: -3.304821
-      outSlope: -3.304821
+      time: 4001.7986
+      value: 425.13553
+      inSlope: 0.018718902
+      outSlope: 0.018718902
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.062234957
+      inWeight: 0.33333334
+      outWeight: 0.1225448
+    - serializedVersion: 3
+      time: 5852.8057
+      value: 383.72147
+      inSlope: -0.06113849
+      outSlope: -0.06113849
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.76163137
+    - serializedVersion: 3
+      time: 6000
+      value: 100
+      inSlope: -0.26729885
+      outSlope: -0.26729885
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.088204324
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  totalPower: 10000
+  idleRpm: 1000
   engineRpm: 0
-  wheelsRpm: 0
-  smoothTime: 0.01
+  motorTorque: 0
   vehicleDrivetrain: 0
-  gears:
-  - 3.33
-  - 2.38
-  - 1.8
-  - 1.41
-  - 1.14
-  - 0.95
-  currentGearNum: 0
-  turnSensitivity: 0.5
-  maxSteerAngle: 40
-  centerOfMass: {x: 0, y: 0, z: 0}
-  moveAction: {fileID: -4069268421021181553, guid: 596a5ed9421f3b448b1192c646989d1b, type: 3}
+  powerDistribution:
+    frontPower: 0.5
+    rearPower: 0.5
+  steeringCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 35
+      inSlope: 0.003681236
+      outSlope: 0.003681236
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.6073073
+    - serializedVersion: 3
+      time: 60
+      value: 24.999992
+      inSlope: -0.30422735
+      outSlope: -0.30422735
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.06261556
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  brakePower: 50000
+  gearRatios:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  finalDriveRatio: 3
+  accelAction: {fileID: -4069268421021181553, guid: 596a5ed9421f3b448b1192c646989d1b, type: 3}
   steerAction: {fileID: 5811089921689790690, guid: 596a5ed9421f3b448b1192c646989d1b, type: 3}
   handBrakeAction: {fileID: 5217967712270376817, guid: 596a5ed9421f3b448b1192c646989d1b, type: 3}
-  gearShiftAction: {fileID: -822668140993231748, guid: 596a5ed9421f3b448b1192c646989d1b, type: 3}
+  shiftAction: {fileID: 5811089921689790690, guid: 596a5ed9421f3b448b1192c646989d1b, type: 3}
+  clutchAction: {fileID: 3500206682901013576, guid: 596a5ed9421f3b448b1192c646989d1b, type: 3}
   currentSpeed: 0
-  moveInputFloat: 0
+  wheelSpeed: 0
+  accelInputFloat: 0
+  brakeInputFloat: 0
   steerInputFloat: 0
   handBrakeInput: 0
-  gearInputBool: 0
+  shiftInputFloat: 0
+  clutchInputFloat: 0
 --- !u!54 &7559441500698811130
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -704,7 +750,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 3
 --- !u!1 &8921600399207261848
 GameObject:
   m_ObjectHideFlags: 0
@@ -830,8 +876,8 @@ WheelCollider:
   m_Center: {x: 0, y: 0.15, z: 0}
   m_Radius: 0.3
   m_SuspensionSpring:
-    spring: 35000
-    damper: 4500
+    spring: 40000
+    damper: 2500
     targetPosition: 0.5
   m_SuspensionDistance: 0.4
   m_ForceAppPointDistance: 0
@@ -863,6 +909,7 @@ GameObject:
   - component: {fileID: 5267673503095892585}
   - component: {fileID: 6139261259676740274}
   - component: {fileID: 3698102988735129394}
+  - component: {fileID: 4328481674204977249}
   m_Layer: 7
   m_Name: Body_Mesh
   m_TagString: Untagged
@@ -946,8 +993,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.018585933, y: 0.006785605, z: 0.03715172}
-  m_Center: {x: 0, y: 0.004858763, z: -0.00059681636}
+  m_Size: {x: 0.01689957, y: 0.0050737644, z: 0.035349667}
+  m_Center: {x: -0.0000244534, y: 0.005714678, z: -0.0010472961}
 --- !u!65 &3698102988735129394
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -959,5 +1006,18 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.018585933, y: 0.0037004491, z: 0.02223309}
-  m_Center: {x: 0, y: 0.01020629, z: -0.00805614}
+  m_Size: {x: 0.012510898, y: 0.0037004491, z: 0.016827267}
+  m_Center: {x: -0.00008534133, y: 0.01020629, z: -0.0053532496}
+--- !u!65 &4328481674204977249
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9191497294672667663}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.018585933, y: 0.00368561, z: 0.0031865023}
+  m_Center: {x: 0, y: 0.010213723, z: -0.017579447}
