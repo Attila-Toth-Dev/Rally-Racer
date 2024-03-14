@@ -218,7 +218,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   car: {fileID: 502166679}
   speedometer: {fileID: 1665786297}
-  gearCount: {fileID: 1306508270}
 --- !u!114 &169495907
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9822,12 +9821,44 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 708645780119819542, guid: a39ace4ad51671445bd5c142a311deb4, type: 3}
+      propertyPath: brakePower
+      value: 50000
+      objectReference: {fileID: 0}
+    - target: {fileID: 708645780119819542, guid: a39ace4ad51671445bd5c142a311deb4, type: 3}
+      propertyPath: accelAction
+      value: 
+      objectReference: {fileID: -4069268421021181553, guid: 596a5ed9421f3b448b1192c646989d1b, type: 3}
+    - target: {fileID: 708645780119819542, guid: a39ace4ad51671445bd5c142a311deb4, type: 3}
+      propertyPath: enginePower
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 708645780119819542, guid: a39ace4ad51671445bd5c142a311deb4, type: 3}
+      propertyPath: shiftAction
+      value: 
+      objectReference: {fileID: -822668140993231748, guid: 596a5ed9421f3b448b1192c646989d1b, type: 3}
+    - target: {fileID: 708645780119819542, guid: a39ace4ad51671445bd5c142a311deb4, type: 3}
+      propertyPath: clutchAction
+      value: 
+      objectReference: {fileID: 3500206682901013576, guid: 596a5ed9421f3b448b1192c646989d1b, type: 3}
+    - target: {fileID: 708645780119819542, guid: a39ace4ad51671445bd5c142a311deb4, type: 3}
       propertyPath: currentGearNum
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 708645780119819542, guid: a39ace4ad51671445bd5c142a311deb4, type: 3}
+      propertyPath: turnSensitivity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 708645780119819542, guid: a39ace4ad51671445bd5c142a311deb4, type: 3}
+      propertyPath: vehicleDrivetrain
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 708645780119819542, guid: a39ace4ad51671445bd5c142a311deb4, type: 3}
       propertyPath: enginePower.m_Curve.Array.size
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 708645780119819542, guid: a39ace4ad51671445bd5c142a311deb4, type: 3}
+      propertyPath: steeringCurve.m_Curve.Array.size
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 708645780119819542, guid: a39ace4ad51671445bd5c142a311deb4, type: 3}
       propertyPath: enginePower.m_Curve.Array.data[0].time
@@ -9854,6 +9885,18 @@ PrefabInstance:
       value: 7.1242476
       objectReference: {fileID: 0}
     - target: {fileID: 708645780119819542, guid: a39ace4ad51671445bd5c142a311deb4, type: 3}
+      propertyPath: steeringCurve.m_Curve.Array.data[0].time
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 708645780119819542, guid: a39ace4ad51671445bd5c142a311deb4, type: 3}
+      propertyPath: steeringCurve.m_Curve.Array.data[1].time
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 708645780119819542, guid: a39ace4ad51671445bd5c142a311deb4, type: 3}
+      propertyPath: steeringCurve.m_Curve.Array.data[2].time
+      value: 33.693787
+      objectReference: {fileID: 0}
+    - target: {fileID: 708645780119819542, guid: a39ace4ad51671445bd5c142a311deb4, type: 3}
       propertyPath: enginePower.m_Curve.Array.data[0].inSlope
       value: 0.033700645
       objectReference: {fileID: 0}
@@ -9864,6 +9907,18 @@ PrefabInstance:
     - target: {fileID: 708645780119819542, guid: a39ace4ad51671445bd5c142a311deb4, type: 3}
       propertyPath: enginePower.m_Curve.Array.data[2].inSlope
       value: -0.45823652
+      objectReference: {fileID: 0}
+    - target: {fileID: 708645780119819542, guid: a39ace4ad51671445bd5c142a311deb4, type: 3}
+      propertyPath: steeringCurve.m_Curve.Array.data[0].value
+      value: 24.999998
+      objectReference: {fileID: 0}
+    - target: {fileID: 708645780119819542, guid: a39ace4ad51671445bd5c142a311deb4, type: 3}
+      propertyPath: steeringCurve.m_Curve.Array.data[1].value
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 708645780119819542, guid: a39ace4ad51671445bd5c142a311deb4, type: 3}
+      propertyPath: steeringCurve.m_Curve.Array.data[2].value
+      value: 4.259247
       objectReference: {fileID: 0}
     - target: {fileID: 708645780119819542, guid: a39ace4ad51671445bd5c142a311deb4, type: 3}
       propertyPath: enginePower.m_Curve.Array.data[0].outSlope
@@ -9892,6 +9947,30 @@ PrefabInstance:
     - target: {fileID: 708645780119819542, guid: a39ace4ad51671445bd5c142a311deb4, type: 3}
       propertyPath: enginePower.m_Curve.Array.data[1].outWeight
       value: 0.29710752
+      objectReference: {fileID: 0}
+    - target: {fileID: 708645780119819542, guid: a39ace4ad51671445bd5c142a311deb4, type: 3}
+      propertyPath: steeringCurve.m_Curve.Array.data[0].inSlope
+      value: -0.034946803
+      objectReference: {fileID: 0}
+    - target: {fileID: 708645780119819542, guid: a39ace4ad51671445bd5c142a311deb4, type: 3}
+      propertyPath: steeringCurve.m_Curve.Array.data[1].inSlope
+      value: -1.0703626
+      objectReference: {fileID: 0}
+    - target: {fileID: 708645780119819542, guid: a39ace4ad51671445bd5c142a311deb4, type: 3}
+      propertyPath: steeringCurve.m_Curve.Array.data[0].outSlope
+      value: -0.034946803
+      objectReference: {fileID: 0}
+    - target: {fileID: 708645780119819542, guid: a39ace4ad51671445bd5c142a311deb4, type: 3}
+      propertyPath: steeringCurve.m_Curve.Array.data[1].inWeight
+      value: 0.081730776
+      objectReference: {fileID: 0}
+    - target: {fileID: 708645780119819542, guid: a39ace4ad51671445bd5c142a311deb4, type: 3}
+      propertyPath: steeringCurve.m_Curve.Array.data[1].outSlope
+      value: -1.0703626
+      objectReference: {fileID: 0}
+    - target: {fileID: 708645780119819542, guid: a39ace4ad51671445bd5c142a311deb4, type: 3}
+      propertyPath: steeringCurve.m_Curve.Array.data[0].outWeight
+      value: 0.1706731
       objectReference: {fileID: 0}
     - target: {fileID: 7657205477522760294, guid: a39ace4ad51671445bd5c142a311deb4, type: 3}
       propertyPath: m_RootOrder
