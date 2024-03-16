@@ -25463,12 +25463,44 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 708645780119819542, guid: a39ace4ad51671445bd5c142a311deb4, type: 3}
+      propertyPath: idleRpm
+      value: 700
+      objectReference: {fileID: 0}
+    - target: {fileID: 708645780119819542, guid: a39ace4ad51671445bd5c142a311deb4, type: 3}
+      propertyPath: shiftUp
+      value: 
+      objectReference: {fileID: 7358592149169669011, guid: 596a5ed9421f3b448b1192c646989d1b, type: 3}
+    - target: {fileID: 708645780119819542, guid: a39ace4ad51671445bd5c142a311deb4, type: 3}
+      propertyPath: shiftDown
+      value: 
+      objectReference: {fileID: 8741333784089881227, guid: 596a5ed9421f3b448b1192c646989d1b, type: 3}
+    - target: {fileID: 708645780119819542, guid: a39ace4ad51671445bd5c142a311deb4, type: 3}
+      propertyPath: finalDriveRatio
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 708645780119819542, guid: a39ace4ad51671445bd5c142a311deb4, type: 3}
       propertyPath: gearRatios.Array.size
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 708645780119819542, guid: a39ace4ad51671445bd5c142a311deb4, type: 3}
       propertyPath: gearRatios.Array.data[0]
-      value: 4
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 708645780119819542, guid: a39ace4ad51671445bd5c142a311deb4, type: 3}
+      propertyPath: gearRatios.Array.data[1]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 708645780119819542, guid: a39ace4ad51671445bd5c142a311deb4, type: 3}
+      propertyPath: gearRatios.Array.data[2]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 708645780119819542, guid: a39ace4ad51671445bd5c142a311deb4, type: 3}
+      propertyPath: gearRatios.Array.data[3]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 708645780119819542, guid: a39ace4ad51671445bd5c142a311deb4, type: 3}
+      propertyPath: gearRatios.Array.data[4]
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7657205477522760294, guid: a39ace4ad51671445bd5c142a311deb4, type: 3}
       propertyPath: m_RootOrder

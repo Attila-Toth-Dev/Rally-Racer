@@ -47,45 +47,51 @@ public class CarController : MonoBehaviour
     [SerializeField] private AnimationCurve torqueCurve;
     [SerializeField, Range(700, 1000)] private float idleRpm;
     [SerializeField, ReadOnly] private float engineRpm;
-    [SerializeField, ReadOnly] private float motorTorque;
+    [FormerlySerializedAs("motorTorque"),SerializeField, ReadOnly] private float totalMotorTorque;
     
     [Header("Drivetrain Settings")]
     [SerializeField] private Drivetrain vehicleDrivetrain;
     [SerializeField, ShowIf("vehicleDrivetrain", Drivetrain.Awd)] private PowerDistribution powerDistribution;
     
-    [Header("Steering Settings")]
+    [Header("Transmission Settings")]
+    [SerializeField] private int gearIndex;
+    [SerializeField] private AnimationCurve gearRatios;
+    [SerializeField] private float finalDriveRatio;
+    
+    [Header("Handling Settings")]
     [SerializeField] private AnimationCurve steeringCurve;
     [SerializeField] private float brakePower;
-
-    [Header("Transmission Settings")]
-    [SerializeField, ReadOnly] private int gearIndex;
-    [SerializeField] private float[] gearRatios;
-    [SerializeField] private float finalDriveRatio;
 
     [Header("Input Actions")]
     [SerializeField] private InputActionReference accelAction;
     [SerializeField] private InputActionReference steerAction;
     [SerializeField] private InputActionReference handBrakeAction;
-    [SerializeField] private InputActionReference shiftAction;
-    [SerializeField] private InputActionReference clutchAction;
+    [SerializeField] private InputActionReference shiftUp;
+    [SerializeField] private InputActionReference shiftDown;
 
     [Header("Debugging Tools")]
     [ReadOnly] public float currentSpeed;
     [SerializeField, ReadOnly] private float wheelSpeed;
+    [SerializeField, ReadOnly] private float frontAxleSpeed;
+    [SerializeField, ReadOnly] private float rearAxleSpeed;
     
     [Header("Input Debugging")]
     [SerializeField, ReadOnly] private float accelInputFloat;
     [SerializeField, ReadOnly] private float brakeInputFloat;
     [SerializeField, ReadOnly] private float steerInputFloat;
     [SerializeField, ReadOnly] private float handBrakeInput;
-    [SerializeField, ReadOnly] private float shiftInputFloat;
-    [SerializeField, ReadOnly] private float clutchInputFloat;
 
     private float wheelRpm;
 
     private float slipAngle;
     private Vector3 centerOfMass;
-    
+
+    private void Awake()
+    {
+        shiftUp.action.performed += ShiftUp;
+        shiftDown.action.performed += ShiftDown;
+    }
+
     private void Start()
     {
         carRb.centerOfMass = centerOfMass;
@@ -98,6 +104,9 @@ public class CarController : MonoBehaviour
         
         // Animations
         AnimateWheels();
+     
+        // Engine Calculations
+        CalculateEngineSpeed();
         
         // Get Current Vehicle Speed
         currentSpeed = carRb.velocity.magnitude * 3.6f;
@@ -105,13 +114,9 @@ public class CarController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        // Engine Calculations
-        CalculateEngineSpeed();
-        WheelRpm();
-        
         // Movement
         Move();
-        
+
         // Handling
         Steer();
         
@@ -120,10 +125,23 @@ public class CarController : MonoBehaviour
         HandBrake();
     }
 
+    private void ShiftUp(InputAction.CallbackContext _context)
+    {
+        gearIndex++;
+    }
+
+    private void ShiftDown(InputAction.CallbackContext _context)
+    {
+        gearIndex--;
+    }
+    
     private void CalculateEngineSpeed()
     {
-        engineRpm = idleRpm + (wheelRpm * finalDriveRatio * gearRatios[gearIndex]) * finalDriveRatio * accelInputFloat;
-        motorTorque = torqueCurve.Evaluate(engineRpm) * gearRatios[gearIndex] * finalDriveRatio * accelInputFloat;
+        // Calculate Wheel Speeds
+        WheelRpm();
+
+        engineRpm = idleRpm + (wheelRpm * finalDriveRatio * gearRatios.Evaluate(gearIndex)) * finalDriveRatio;
+        totalMotorTorque = torqueCurve.Evaluate(engineRpm) * gearRatios.Evaluate(gearIndex) * finalDriveRatio * accelInputFloat;
     }
 
     private void WheelRpm()
@@ -148,19 +166,19 @@ public class CarController : MonoBehaviour
             if(vehicleDrivetrain == Drivetrain.Awd)
             {
                 if(wheel.axleOfWheel == Axle.Front)
-                    wheel.wheelCollider.motorTorque = (motorTorque / 4) * powerDistribution.frontPower;
+                    wheel.wheelCollider.motorTorque = (totalMotorTorque / 4);
                 
                 if(wheel.axleOfWheel == Axle.Rear)
-                    wheel.wheelCollider.motorTorque = (motorTorque / 4) * powerDistribution.rearPower;
+                    wheel.wheelCollider.motorTorque = (totalMotorTorque / 4);
             }
             
             // Movement for RWD Cars
             if(wheel.axleOfWheel == Axle.Rear && vehicleDrivetrain == Drivetrain.Rwd)
-                wheel.wheelCollider.motorTorque = (motorTorque / 2);
+                wheel.wheelCollider.motorTorque = (totalMotorTorque / 2);
 
             // Movement for FWD Cars
             if(wheel.axleOfWheel == Axle.Front && vehicleDrivetrain == Drivetrain.Fwd)
-                wheel.wheelCollider.motorTorque = (motorTorque / 2);
+                wheel.wheelCollider.motorTorque = (totalMotorTorque / 2);
         }
     }
 
@@ -176,7 +194,7 @@ public class CarController : MonoBehaviour
                 //steerAngle += Vector3.SignedAngle(transform.forward, carRb.velocity + transform.forward, Vector3.up);
                 //steerAngle = Mathf.Clamp(steerAngle, -90f, 90f);
                 
-                wheel.wheelCollider.steerAngle = steerAngle;
+                wheel.wheelCollider.steerAngle = Mathf.Lerp(wheel.wheelCollider.steerAngle, steerAngle, 0.6f);
             }
         }
     }
@@ -221,13 +239,10 @@ public class CarController : MonoBehaviour
         accelInputFloat = accelAction.action.ReadValue<float>();
         steerInputFloat = steerAction.action.ReadValue<float>();
         handBrakeInput = handBrakeAction.action.ReadValue<float>();
-        shiftInputFloat = shiftAction.action.ReadValue<float>();
-        clutchInputFloat = clutchAction.action.ReadValue<float>();
-        
+                                                                                                                
         // Gets the input of the braking motion from
         // from the acceleration input. Then allows the player
         // to reverse
-        slipAngle = Vector3.Angle(transform.forward, carRb.velocity - transform.forward);
         if(slipAngle < 120f)
         {
             if(accelInputFloat < 0)
@@ -238,8 +253,6 @@ public class CarController : MonoBehaviour
             else
                 brakeInputFloat = 0;
         }
-        else
-            brakeInputFloat = 0;
     }   
 
     private void OnEnable()
@@ -247,8 +260,9 @@ public class CarController : MonoBehaviour
         accelAction.action.Enable();
         steerAction.action.Enable();
         handBrakeAction.action.Enable();
-        shiftAction.action.Enable();
-        clutchAction.action.Enable();
+        
+        shiftUp.action.Enable();
+        shiftDown.action.Enable();
     }
 
     private void OnDisable()
@@ -256,7 +270,8 @@ public class CarController : MonoBehaviour
         accelAction.action.Disable();
         steerAction.action.Disable();
         handBrakeAction.action.Disable();
-        shiftAction.action.Disable();
-        clutchAction.action.Disable();
+        
+        shiftUp.action.Disable();
+        shiftDown.action.Disable();
     }
 }

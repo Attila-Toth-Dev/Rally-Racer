@@ -684,11 +684,82 @@ MonoBehaviour:
     m_RotationOrder: 4
   idleRpm: 1000
   engineRpm: 0
-  motorTorque: 0
+  totalMotorTorque: 0
   vehicleDrivetrain: 0
   powerDistribution:
     frontPower: 0.5
     rearPower: 0.5
+  gearIndex: 1
+  gearRatios:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: -1
+      value: -1
+      inSlope: 0
+      outSlope: 1
+      tangentMode: 69
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 1
+      outSlope: 4
+      tangentMode: 69
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 4
+      inSlope: 4
+      outSlope: -1
+      tangentMode: 69
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 2
+      value: 3
+      inSlope: -1
+      outSlope: -1
+      tangentMode: 69
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 3
+      value: 2
+      inSlope: -1
+      outSlope: -0.5
+      tangentMode: 69
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 4
+      value: 1.5
+      inSlope: -0.5
+      outSlope: -0.5
+      tangentMode: 69
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 5
+      value: 1
+      inSlope: -0.5
+      outSlope: 0
+      tangentMode: 69
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  finalDriveRatio: 3
   steeringCurve:
     serializedVersion: 2
     m_Curve:
@@ -714,27 +785,19 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   brakePower: 50000
-  gearRatios:
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  - 0
-  finalDriveRatio: 3
   accelAction: {fileID: -4069268421021181553, guid: 596a5ed9421f3b448b1192c646989d1b, type: 3}
   steerAction: {fileID: 5811089921689790690, guid: 596a5ed9421f3b448b1192c646989d1b, type: 3}
   handBrakeAction: {fileID: 5217967712270376817, guid: 596a5ed9421f3b448b1192c646989d1b, type: 3}
-  shiftAction: {fileID: 5811089921689790690, guid: 596a5ed9421f3b448b1192c646989d1b, type: 3}
-  clutchAction: {fileID: 3500206682901013576, guid: 596a5ed9421f3b448b1192c646989d1b, type: 3}
+  shiftUp: {fileID: 7358592149169669011, guid: 596a5ed9421f3b448b1192c646989d1b, type: 3}
+  shiftDown: {fileID: 8741333784089881227, guid: 596a5ed9421f3b448b1192c646989d1b, type: 3}
   currentSpeed: 0
   wheelSpeed: 0
+  frontAxleSpeed: 0
+  rearAxleSpeed: 0
   accelInputFloat: 0
   brakeInputFloat: 0
   steerInputFloat: 0
   handBrakeInput: 0
-  shiftInputFloat: 0
-  clutchInputFloat: 0
 --- !u!54 &7559441500698811130
 Rigidbody:
   m_ObjectHideFlags: 0

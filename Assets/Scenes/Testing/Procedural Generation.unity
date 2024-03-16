@@ -417,7 +417,7 @@ MonoBehaviour:
   xWidth: 256
   zWidth: 256
   height: 10
-  noiseScale: 15
+  noiseScale: 20
   octaves: 1
   persistence: 1
   lacunarity: 1
@@ -493,6 +493,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 708645780119819542, guid: a39ace4ad51671445bd5c142a311deb4, type: 3}
+      propertyPath: finalDriveRatio
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 708645780119819542, guid: a39ace4ad51671445bd5c142a311deb4, type: 3}
+      propertyPath: gearRatios.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 708645780119819542, guid: a39ace4ad51671445bd5c142a311deb4, type: 3}
+      propertyPath: gearRatios.Array.data[0]
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 7657205477522760294, guid: a39ace4ad51671445bd5c142a311deb4, type: 3}
       propertyPath: m_RootOrder
       value: 3
