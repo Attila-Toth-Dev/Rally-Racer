@@ -33,8 +33,8 @@ internal struct Wheel
 [Serializable]
 internal struct PowerDistribution
 {
-    [Range(0, 1)] public float frontPower;
-    [Range(0, 1)] public float rearPower;
+    [Range(1, 9)] public int frontPower;
+    [Range(1, 9)] public int rearPower;
 }
 
 public class CarController : MonoBehaviour
@@ -54,9 +54,11 @@ public class CarController : MonoBehaviour
     [SerializeField, ShowIf("vehicleDrivetrain", Drivetrain.Awd)] private PowerDistribution powerDistribution;
     
     [Header("Transmission Settings")]
-    [SerializeField] private int gearIndex;
     [SerializeField] private AnimationCurve gearRatios;
     [SerializeField] private float finalDriveRatio;
+    [SerializeField] private int minGears;
+    [SerializeField] private int maxGears;
+    [SerializeField, ReadOnly] private int gearIndex;
     
     [Header("Handling Settings")]
     [SerializeField] private AnimationCurve steeringCurve;
@@ -72,8 +74,6 @@ public class CarController : MonoBehaviour
     [Header("Debugging Tools")]
     [ReadOnly] public float currentSpeed;
     [SerializeField, ReadOnly] private float wheelSpeed;
-    [SerializeField, ReadOnly] private float frontAxleSpeed;
-    [SerializeField, ReadOnly] private float rearAxleSpeed;
     
     [Header("Input Debugging")]
     [SerializeField, ReadOnly] private float accelInputFloat;
@@ -128,11 +128,17 @@ public class CarController : MonoBehaviour
     private void ShiftUp(InputAction.CallbackContext _context)
     {
         gearIndex++;
+
+        if(gearIndex > maxGears)
+            gearIndex = maxGears;
     }
 
     private void ShiftDown(InputAction.CallbackContext _context)
     {
         gearIndex--;
+
+        if(gearIndex < minGears)
+            gearIndex = minGears;
     }
     
     private void CalculateEngineSpeed()
@@ -147,15 +153,11 @@ public class CarController : MonoBehaviour
     private void WheelRpm()
     {
         float sum = 0;
-        int r = 0;
         
         for(int i = 0; i < wheels.Count; i++)
-        {
             sum += wheels[i].wheelCollider.rpm;
-            r++;
-        }
 
-        wheelRpm = (r != 0) ? sum / r : 0;
+        wheelRpm = sum;
     }
 
     private void Move()
@@ -194,7 +196,7 @@ public class CarController : MonoBehaviour
                 //steerAngle += Vector3.SignedAngle(transform.forward, carRb.velocity + transform.forward, Vector3.up);
                 //steerAngle = Mathf.Clamp(steerAngle, -90f, 90f);
                 
-                wheel.wheelCollider.steerAngle = Mathf.Lerp(wheel.wheelCollider.steerAngle, steerAngle, 0.6f);
+                wheel.wheelCollider.steerAngle = steerAngle;
             }
         }
     }

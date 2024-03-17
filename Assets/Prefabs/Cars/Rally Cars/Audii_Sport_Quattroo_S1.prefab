@@ -687,9 +687,8 @@ MonoBehaviour:
   totalMotorTorque: 0
   vehicleDrivetrain: 0
   powerDistribution:
-    frontPower: 0.5
-    rearPower: 0.5
-  gearIndex: 1
+    frontPower: 5
+    rearPower: 5
   gearRatios:
     serializedVersion: 2
     m_Curve:
@@ -706,51 +705,51 @@ MonoBehaviour:
       time: 0
       value: 0
       inSlope: 1
-      outSlope: 4
+      outSlope: 3.5
       tangentMode: 69
       weightedMode: 0
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
       time: 1
-      value: 4
-      inSlope: 4
-      outSlope: -1
+      value: 3.5
+      inSlope: 3.5
+      outSlope: -1.4200001
       tangentMode: 69
       weightedMode: 0
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
       time: 2
-      value: 3
-      inSlope: -1
-      outSlope: -1
+      value: 2.08
+      inSlope: -1.4200001
+      outSlope: -0.7099999
       tangentMode: 69
       weightedMode: 0
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
       time: 3
-      value: 2
-      inSlope: -1
-      outSlope: -0.5
+      value: 1.37
+      inSlope: -0.7099999
+      outSlope: -0.41000003
       tangentMode: 69
       weightedMode: 0
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
       time: 4
-      value: 1.5
-      inSlope: -0.5
-      outSlope: -0.5
+      value: 0.96
+      inSlope: -0.41000003
+      outSlope: -0.13999999
       tangentMode: 69
       weightedMode: 0
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
       time: 5
-      value: 1
-      inSlope: -0.5
+      value: 0.82
+      inSlope: -0.13999999
       outSlope: 0
       tangentMode: 69
       weightedMode: 0
@@ -759,7 +758,10 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  finalDriveRatio: 3
+  finalDriveRatio: 3.88
+  minGears: -1
+  maxGears: 4
+  gearIndex: 1
   steeringCurve:
     serializedVersion: 2
     m_Curve:
@@ -792,8 +794,6 @@ MonoBehaviour:
   shiftDown: {fileID: 8741333784089881227, guid: 596a5ed9421f3b448b1192c646989d1b, type: 3}
   currentSpeed: 0
   wheelSpeed: 0
-  frontAxleSpeed: 0
-  rearAxleSpeed: 0
   accelInputFloat: 0
   brakeInputFloat: 0
   steerInputFloat: 0
