@@ -730,7 +730,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  idleRpm: 700
+  idleRpm: 740
   engineRpm: 0
   engineHorsePower: 0
   engineTorque: 0
@@ -739,11 +739,12 @@ MonoBehaviour:
     frontPower: 0.5
     rearPower: 0.5
   gearRatios:
-  - 2
-  - 0
-  - 2
-  - 2
-  - 4
+  - -3.5
+  - 3.111
+  - 2.273
+  - 1.706
+  - 1.318
+  - 1.125
   finalDriveRatio: 3.88
   gearIndex: 1
   steerCurve:

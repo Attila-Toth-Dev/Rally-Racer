@@ -95,6 +95,7 @@ public class CarController : MonoBehaviour
     private void Start()
     {
         carRb.centerOfMass = centerOfMass;
+        gearIndex = 1;
     }
 
     private void Update()
@@ -160,7 +161,7 @@ public class CarController : MonoBehaviour
         
         engineRpm = idleRpm + (Mathf.Abs(wheelsRpm) * finalDriveRatio * gearRatios[gearIndex]) / finalDriveRatio;
         engineHorsePower = torqueCurve.Evaluate(engineRpm) * gearRatios[gearIndex] * accelInputFloat;
-        engineTorque = engineHorsePower * 5252 / engineRpm;
+        engineTorque = (engineHorsePower * 5252 / engineRpm) * 1.3558f;
     }
 
     // Calculate the wheel rpm when driving
@@ -185,22 +186,32 @@ public class CarController : MonoBehaviour
         foreach (Wheel wheel in wheels)
         {
             // Movement for AWD Cars
-            if(vehicleDrivetrain == Drivetrain.Awd) 
-                wheel.wheelCollider.motorTorque = engineHorsePower / 2;
+            if(vehicleDrivetrain == Drivetrain.Awd)
+            {
+                if(wheel.axleOfWheel == Axle.Front)
+                    wheel.wheelCollider.motorTorque = engineHorsePower * powerDistribution.frontPower;
+
+                if (wheel.axleOfWheel == Axle.Rear)
+                    wheel.wheelCollider.motorTorque = engineHorsePower * powerDistribution.rearPower;
+            }
 
             // Movement for RWD Cars
-            if(wheel.axleOfWheel == Axle.Rear && vehicleDrivetrain == Drivetrain.Rwd)
-                wheel.wheelCollider.motorTorque = engineHorsePower / 2;
+            if (vehicleDrivetrain == Drivetrain.Rwd)
+                if(wheel.axleOfWheel == Axle.Rear)
+                    wheel.wheelCollider.motorTorque = engineHorsePower * 0.5f;
 
             // Movement for FWD Cars
-            if(wheel.axleOfWheel == Axle.Front && vehicleDrivetrain == Drivetrain.Fwd)
-                wheel.wheelCollider.motorTorque = engineHorsePower / 2;
+            if(vehicleDrivetrain == Drivetrain.Fwd)
+                if(wheel.axleOfWheel == Axle.Front)
+                    wheel.wheelCollider.motorTorque = engineHorsePower * 0.5f;
         }
     }
 
     // Steer the wheels on front Axle
     private void Steer()
     {
+        // MAKE INTO COROUTINE
+
         foreach (Wheel wheel in wheels)
         {
             if(wheel.axleOfWheel == Axle.Front)
