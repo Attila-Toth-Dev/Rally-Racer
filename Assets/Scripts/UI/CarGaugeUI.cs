@@ -9,9 +9,10 @@ public class CarGaugeUI : MonoBehaviour
 
 	[Header("Gauge Placeholders")]
 	[SerializeField] private TextMeshProUGUI speedometer;
+	[SerializeField] private TextMeshProUGUI currentGear;
 
 	private void Update()
 	{
-		speedometer.text = $"{(int)car.currentSpeed}km/h";;
+		speedometer.text = $"{(int)car.currentSpeed}km/h";
 	}
 }

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7806633303027595446}
   - component: {fileID: 365863110447717164}
+  - component: {fileID: 2717324122880301627}
   m_Layer: 7
   m_Name: wheel_RL
   m_TagString: Untagged
@@ -62,6 +63,21 @@ WheelCollider:
     m_AsymptoteValue: 0.75
     m_Stiffness: 2.4
   m_Enabled: 1
+--- !u!114 &2717324122880301627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1496652374899328619}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7e8656254f84434983b10ab4fca2b3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wheelModel: {fileID: 1807649536857976342}
+  raysNumber: 36
+  raysMaxAngle: 180
 --- !u!1 &1775235759212062205
 GameObject:
   m_ObjectHideFlags: 0
@@ -456,6 +472,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9029207406078489758}
   - component: {fileID: 2930323203048832408}
+  - component: {fileID: 3814544414020348043}
   m_Layer: 7
   m_Name: wheel_RR
   m_TagString: Untagged
@@ -508,6 +525,21 @@ WheelCollider:
     m_AsymptoteValue: 0.75
     m_Stiffness: 2.4
   m_Enabled: 1
+--- !u!114 &3814544414020348043
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7810361790262028533}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7e8656254f84434983b10ab4fca2b3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wheelModel: {fileID: 3708780167755292536}
+  raysNumber: 36
+  raysMaxAngle: 180
 --- !u!1 &8038657542107045178
 GameObject:
   m_ObjectHideFlags: 0
@@ -518,6 +550,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5021384054942284}
   - component: {fileID: 3494394723711910619}
+  - component: {fileID: 6085189276916972418}
   m_Layer: 7
   m_Name: wheel_FL
   m_TagString: Untagged
@@ -570,6 +603,21 @@ WheelCollider:
     m_AsymptoteValue: 0.75
     m_Stiffness: 2.4
   m_Enabled: 1
+--- !u!114 &6085189276916972418
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8038657542107045178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7e8656254f84434983b10ab4fca2b3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wheelModel: {fileID: 1661447767758853887}
+  raysNumber: 36
+  raysMaxAngle: 180
 --- !u!1 &8484030449367306885
 GameObject:
   m_ObjectHideFlags: 0
@@ -684,108 +732,45 @@ MonoBehaviour:
     m_RotationOrder: 4
   idleRpm: 700
   engineRpm: 0
-  totalMotorTorque: 0
+  engineHorsePower: 0
+  engineTorque: 0
   vehicleDrivetrain: 0
   powerDistribution:
     frontPower: 0.5
     rearPower: 0.5
   gearRatios:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: -1
-      value: -1
-      inSlope: 0
-      outSlope: 1
-      tangentMode: 69
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 1
-      outSlope: 3.5
-      tangentMode: 69
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 3.5
-      inSlope: 3.5
-      outSlope: -1.4200001
-      tangentMode: 69
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 2
-      value: 2.08
-      inSlope: -1.4200001
-      outSlope: -0.7099999
-      tangentMode: 69
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 3
-      value: 1.37
-      inSlope: -0.7099999
-      outSlope: -0.41000003
-      tangentMode: 69
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 4
-      value: 0.96
-      inSlope: -0.41000003
-      outSlope: -0.13999999
-      tangentMode: 69
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 5
-      value: 0.82
-      inSlope: -0.13999999
-      outSlope: 0
-      tangentMode: 69
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
+  - 2
+  - 0
+  - 2
+  - 2
+  - 4
   finalDriveRatio: 3.88
-  minGears: -1
-  maxGears: 4
   gearIndex: 1
-  steeringCurve:
+  steerCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
       value: 35
-      inSlope: 0.003681236
-      outSlope: 0.003681236
+      inSlope: 0.0018303788
+      outSlope: 0.0018303788
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.6073073
+      outWeight: 0.27858496
     - serializedVersion: 3
-      time: 60
-      value: 24.999992
-      inSlope: -0.30422735
-      outSlope: -0.30422735
+      time: 70
+      value: 20
+      inSlope: -0.38844565
+      outSlope: -0.38844565
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.06261556
+      inWeight: 0.10410881
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  turnSensitivity: 40
   brakePower: 60000
   accelAction: {fileID: -4069268421021181553, guid: 596a5ed9421f3b448b1192c646989d1b, type: 3}
   steerAction: {fileID: 5811089921689790690, guid: 596a5ed9421f3b448b1192c646989d1b, type: 3}
@@ -793,7 +778,6 @@ MonoBehaviour:
   shiftUp: {fileID: 7358592149169669011, guid: 596a5ed9421f3b448b1192c646989d1b, type: 3}
   shiftDown: {fileID: 8741333784089881227, guid: 596a5ed9421f3b448b1192c646989d1b, type: 3}
   currentSpeed: 0
-  wheelSpeed: 0
   accelInputFloat: 0
   brakeInputFloat: 0
   steerInputFloat: 0
@@ -907,6 +891,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6053442331023455986}
   - component: {fileID: 768864308171011750}
+  - component: {fileID: 8752967055445030380}
   m_Layer: 7
   m_Name: wheel_FR
   m_TagString: Untagged
@@ -959,6 +944,21 @@ WheelCollider:
     m_AsymptoteValue: 0.75
     m_Stiffness: 2.4
   m_Enabled: 1
+--- !u!114 &8752967055445030380
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9020469523333199146}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7e8656254f84434983b10ab4fca2b3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wheelModel: {fileID: 2052179716230797183}
+  raysNumber: 36
+  raysMaxAngle: 180
 --- !u!1 &9191497294672667663
 GameObject:
   m_ObjectHideFlags: 0
