@@ -682,13 +682,13 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  idleRpm: 1000
+  idleRpm: 700
   engineRpm: 0
   totalMotorTorque: 0
   vehicleDrivetrain: 0
   powerDistribution:
-    frontPower: 5
-    rearPower: 5
+    frontPower: 0.5
+    rearPower: 0.5
   gearRatios:
     serializedVersion: 2
     m_Curve:
@@ -786,7 +786,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  brakePower: 50000
+  brakePower: 60000
   accelAction: {fileID: -4069268421021181553, guid: 596a5ed9421f3b448b1192c646989d1b, type: 3}
   steerAction: {fileID: 5811089921689790690, guid: 596a5ed9421f3b448b1192c646989d1b, type: 3}
   handBrakeAction: {fileID: 5217967712270376817, guid: 596a5ed9421f3b448b1192c646989d1b, type: 3}

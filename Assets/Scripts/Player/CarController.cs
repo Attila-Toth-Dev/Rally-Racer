@@ -33,8 +33,8 @@ internal struct Wheel
 [Serializable]
 internal struct PowerDistribution
 {
-    [Range(1, 9)] public int frontPower;
-    [Range(1, 9)] public int rearPower;
+    [Range(0, 1)] public float frontPower;
+    [Range(0, 1)] public float rearPower;
 }
 
 public class CarController : MonoBehaviour
@@ -147,7 +147,7 @@ public class CarController : MonoBehaviour
         WheelRpm();
 
         engineRpm = idleRpm + (wheelRpm * finalDriveRatio * gearRatios.Evaluate(gearIndex)) * finalDriveRatio / 100;
-        totalMotorTorque = torqueCurve.Evaluate(engineRpm) * gearRatios.Evaluate(gearIndex) * finalDriveRatio * accelInputFloat / 10;
+        totalMotorTorque = torqueCurve.Evaluate(engineRpm) * gearRatios.Evaluate(gearIndex) * finalDriveRatio * accelInputFloat;
     }
 
     private void WheelRpm()
@@ -218,10 +218,10 @@ public class CarController : MonoBehaviour
         foreach(Wheel wheel in wheels)
         {
             if(wheel.axleOfWheel == Axle.Front)
-                wheel.wheelCollider.brakeTorque = brakeInputFloat * brakePower * 0.7f;
+                wheel.wheelCollider.brakeTorque = brakeInputFloat * brakePower * carRb.drag * 1.5f;
 
             if(wheel.axleOfWheel == Axle.Rear)
-                wheel.wheelCollider.brakeTorque = brakeInputFloat * brakePower * 0.3f;
+                wheel.wheelCollider.brakeTorque = brakeInputFloat * brakePower * carRb.drag * 0.3f;
         }
     }
 
