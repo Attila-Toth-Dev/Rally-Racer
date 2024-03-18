@@ -58,7 +58,7 @@ public class CarController : MonoBehaviour
     [SerializeField] private float finalDriveRatio;
     [SerializeField] private int minGears;
     [SerializeField] private int maxGears;
-    [SerializeField, ReadOnly] private int gearIndex;
+    [SerializeField, ReadOnly] private int gearIndex = 0;
     
     [Header("Handling Settings")]
     [SerializeField] private AnimationCurve steeringCurve;
@@ -146,8 +146,8 @@ public class CarController : MonoBehaviour
         // Calculate Wheel Speeds
         WheelRpm();
 
-        engineRpm = idleRpm + (wheelRpm * finalDriveRatio * gearRatios.Evaluate(gearIndex)) * finalDriveRatio;
-        totalMotorTorque = torqueCurve.Evaluate(engineRpm) * gearRatios.Evaluate(gearIndex) * finalDriveRatio * accelInputFloat;
+        engineRpm = idleRpm + (wheelRpm * finalDriveRatio * gearRatios.Evaluate(gearIndex)) * finalDriveRatio / 100;
+        totalMotorTorque = torqueCurve.Evaluate(engineRpm) * gearRatios.Evaluate(gearIndex) * finalDriveRatio * accelInputFloat / 10;
     }
 
     private void WheelRpm()
