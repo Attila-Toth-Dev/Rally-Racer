@@ -47,21 +47,22 @@ public class CarController : MonoBehaviour
     [SerializeField] private AnimationCurve torqueCurve;
     [SerializeField, Range(700, 1000)] private float idleRpm;
     [SerializeField, ReadOnly] private float engineRpm;
-    [FormerlySerializedAs("motorTorque"),SerializeField, ReadOnly] private float totalMotorTorque;
+    [SerializeField, ReadOnly] private float engineHorsePower;
+    [SerializeField, ReadOnly] private float engineTorque;
     
     [Header("Drivetrain Settings")]
     [SerializeField] private Drivetrain vehicleDrivetrain;
     [SerializeField, ShowIf("vehicleDrivetrain", Drivetrain.Awd)] private PowerDistribution powerDistribution;
-    
+
     [Header("Transmission Settings")]
-    [SerializeField] private AnimationCurve gearRatios;
+    //[SerializeField] private AnimationCurve gearRatios;
+    [SerializeField] private float[] gearRatios;
     [SerializeField] private float finalDriveRatio;
-    [SerializeField] private int minGears;
-    [SerializeField] private int maxGears;
     [SerializeField, ReadOnly] private int gearIndex = 0;
-    
+
     [Header("Handling Settings")]
-    [SerializeField] private AnimationCurve steeringCurve;
+    [SerializeField] private AnimationCurve steerCurve;
+    [SerializeField] private float turnSensitivity;
     [SerializeField] private float brakePower;
 
     [Header("Input Actions")]
@@ -73,7 +74,6 @@ public class CarController : MonoBehaviour
 
     [Header("Debugging Tools")]
     [ReadOnly] public float currentSpeed;
-    [SerializeField, ReadOnly] private float wheelSpeed;
     
     [Header("Input Debugging")]
     [SerializeField, ReadOnly] private float accelInputFloat;
@@ -81,7 +81,7 @@ public class CarController : MonoBehaviour
     [SerializeField, ReadOnly] private float steerInputFloat;
     [SerializeField, ReadOnly] private float handBrakeInput;
 
-    private float wheelRpm;
+    private float wheelsRpm;
 
     private float slipAngle;
     private Vector3 centerOfMass;
@@ -108,8 +108,17 @@ public class CarController : MonoBehaviour
         // Engine Calculations
         CalculateEngineSpeed();
         
+        // Transmission
+        GearBox();
+        
         // Get Current Vehicle Speed
         currentSpeed = carRb.velocity.magnitude * 3.6f;
+    }
+
+    private void GearBox()
+    {
+        
+        
     }
 
     private void FixedUpdate()
@@ -125,82 +134,84 @@ public class CarController : MonoBehaviour
         HandBrake();
     }
 
+    // Shift transmission up a gear
     private void ShiftUp(InputAction.CallbackContext _context)
     {
         gearIndex++;
 
-        if(gearIndex > maxGears)
-            gearIndex = maxGears;
+        if(gearIndex >= gearRatios.Length)
+            gearIndex = gearRatios.Length;
     }
 
+    // Shift transmission down a gear
     private void ShiftDown(InputAction.CallbackContext _context)
     {
         gearIndex--;
 
-        if(gearIndex < minGears)
-            gearIndex = minGears;
+        if(gearIndex < gearRatios.Length - gearRatios.Length)
+            gearIndex = gearRatios.Length - gearRatios.Length;
     }
-    
+
+    // Add calculated wheel rpm to get motor torque to drive vehicle
     private void CalculateEngineSpeed()
     {
         // Calculate Wheel Speeds
         WheelRpm();
-
-        engineRpm = idleRpm + (wheelRpm * finalDriveRatio * gearRatios.Evaluate(gearIndex)) * finalDriveRatio / 100;
-        totalMotorTorque = torqueCurve.Evaluate(engineRpm) * gearRatios.Evaluate(gearIndex) * finalDriveRatio * accelInputFloat;
+        
+        engineRpm = idleRpm + (Mathf.Abs(wheelsRpm) * finalDriveRatio * gearRatios[gearIndex]) / finalDriveRatio;
+        engineHorsePower = torqueCurve.Evaluate(engineRpm) * gearRatios[gearIndex] * accelInputFloat;
+        engineTorque = engineHorsePower * 5252 / engineRpm;
     }
 
+    // Calculate the wheel rpm when driving
     private void WheelRpm()
     {
         float sum = 0;
-        
         for(int i = 0; i < wheels.Count; i++)
-            sum += wheels[i].wheelCollider.rpm;
+        {
+            if(vehicleDrivetrain == Drivetrain.Awd)
+                sum += wheels[i].wheelCollider.rpm;
+            
+            if(vehicleDrivetrain is Drivetrain.Rwd or Drivetrain.Fwd)
+                sum += wheels[i].wheelCollider.rpm * 0.5f;
+        }
 
-        wheelRpm = sum;
+        wheelsRpm = sum;
     }
 
+    // Move the car at necessary speed with set drivetrain
     private void Move()
     {
         foreach (Wheel wheel in wheels)
         {
             // Movement for AWD Cars
-            if(vehicleDrivetrain == Drivetrain.Awd)
-            {
-                if(wheel.axleOfWheel == Axle.Front)
-                    wheel.wheelCollider.motorTorque = (totalMotorTorque / 4);
-                
-                if(wheel.axleOfWheel == Axle.Rear)
-                    wheel.wheelCollider.motorTorque = (totalMotorTorque / 4);
-            }
-            
+            if(vehicleDrivetrain == Drivetrain.Awd) 
+                wheel.wheelCollider.motorTorque = engineHorsePower / 2;
+
             // Movement for RWD Cars
             if(wheel.axleOfWheel == Axle.Rear && vehicleDrivetrain == Drivetrain.Rwd)
-                wheel.wheelCollider.motorTorque = (totalMotorTorque / 2);
+                wheel.wheelCollider.motorTorque = engineHorsePower / 2;
 
             // Movement for FWD Cars
             if(wheel.axleOfWheel == Axle.Front && vehicleDrivetrain == Drivetrain.Fwd)
-                wheel.wheelCollider.motorTorque = (totalMotorTorque / 2);
+                wheel.wheelCollider.motorTorque = engineHorsePower / 2;
         }
     }
 
+    // Steer the wheels on front Axle
     private void Steer()
     {
         foreach (Wheel wheel in wheels)
         {
             if(wheel.axleOfWheel == Axle.Front)
             {
-                float steerAngle = steerInputFloat * steeringCurve.Evaluate(currentSpeed);
-                
-                // Counter Steering
-                //steerAngle += Vector3.SignedAngle(transform.forward, carRb.velocity + transform.forward, Vector3.up);
-                //steerAngle = Mathf.Clamp(steerAngle, -90f, 90f);
-                
-                wheel.wheelCollider.steerAngle = steerAngle;
+                float steerAngle = Mathf.Lerp(0, steerCurve.Evaluate(currentSpeed), turnSensitivity);
+                wheel.wheelCollider.steerAngle = steerAngle * steerInputFloat;
             }
         }
     }
 
+    // Apply a heavy brake force onto wheels on rear axle
     private void HandBrake()
     {
         if(handBrakeInput > 0)
@@ -212,7 +223,8 @@ public class CarController : MonoBehaviour
             }
         }
     }
-
+    
+    // Apply necessary brake pressure onto front and rear axles
     private void Brake()
     {
         foreach(Wheel wheel in wheels)
