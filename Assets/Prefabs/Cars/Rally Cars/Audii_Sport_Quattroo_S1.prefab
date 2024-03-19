@@ -692,40 +692,40 @@ MonoBehaviour:
       inWeight: 0
       outWeight: 0.005919958
     - serializedVersion: 3
-      time: 243.54077
-      value: 283.62476
-      inSlope: 0.082632475
-      outSlope: 0.082632475
+      time: 754.6062
+      value: 340.3082
+      inSlope: 0.073323384
+      outSlope: 0.073323384
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.06077265
+      outWeight: 0.342672
     - serializedVersion: 3
-      time: 4001.7986
-      value: 425.13553
-      inSlope: 0.018718902
-      outSlope: 0.018718902
+      time: 2738.7659
+      value: 465.2339
+      inSlope: 0.025072359
+      outSlope: 0.025072359
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.1225448
-    - serializedVersion: 3
-      time: 5852.8057
-      value: 383.72147
-      inSlope: -0.06113849
-      outSlope: -0.06113849
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
+      inWeight: 0.28403434
       outWeight: 0.76163137
     - serializedVersion: 3
-      time: 6000
-      value: 100
-      inSlope: -0.26729885
-      outSlope: -0.26729885
+      time: 7500
+      value: 550
+      inSlope: -0.00007422269
+      outSlope: -0.00007422269
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.088204324
+      inWeight: 0.33333334
+      outWeight: 0.73833305
+    - serializedVersion: 3
+      time: 8500
+      value: 100
+      inSlope: -0.57304394
+      outSlope: -0.57304394
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.08885156
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
@@ -740,12 +740,11 @@ MonoBehaviour:
     rearPower: 0.5
   gearRatios:
   - -3.5
-  - 3.111
+  - 2.9
   - 2.273
   - 1.706
   - 1.318
   - 1.125
-  finalDriveRatio: 3.88
   gearIndex: 1
   steerCurve:
     serializedVersion: 2
@@ -779,6 +778,7 @@ MonoBehaviour:
   shiftUp: {fileID: 7358592149169669011, guid: 596a5ed9421f3b448b1192c646989d1b, type: 3}
   shiftDown: {fileID: 8741333784089881227, guid: 596a5ed9421f3b448b1192c646989d1b, type: 3}
   currentSpeed: 0
+  wheelsRpm: 0
   accelInputFloat: 0
   brakeInputFloat: 0
   steerInputFloat: 0

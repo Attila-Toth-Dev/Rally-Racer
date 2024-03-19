@@ -57,7 +57,7 @@ public class CarController : MonoBehaviour
     [Header("Transmission Settings")]
     //[SerializeField] private AnimationCurve gearRatios;
     [SerializeField] private float[] gearRatios;
-    [SerializeField] private float finalDriveRatio;
+    //[SerializeField] private float finalDriveRatio;
     [SerializeField, ReadOnly] private int gearIndex = 0;
 
     [Header("Handling Settings")]
@@ -74,6 +74,7 @@ public class CarController : MonoBehaviour
 
     [Header("Debugging Tools")]
     [ReadOnly] public float currentSpeed;
+    [SerializeField, ReadOnly] private float wheelsRpm;
     
     [Header("Input Debugging")]
     [SerializeField, ReadOnly] private float accelInputFloat;
@@ -81,7 +82,6 @@ public class CarController : MonoBehaviour
     [SerializeField, ReadOnly] private float steerInputFloat;
     [SerializeField, ReadOnly] private float handBrakeInput;
 
-    private float wheelsRpm;
 
     private float slipAngle;
     private Vector3 centerOfMass;
@@ -102,15 +102,12 @@ public class CarController : MonoBehaviour
     {
         // Update Inputs
         GetInputs();
-        
-        // Animations
-        AnimateWheels();
-     
+
         // Engine Calculations
         CalculateEngineSpeed();
-        
-        // Transmission
-        GearBox();
+
+        // Animations
+        AnimateWheels();
         
         // Get Current Vehicle Speed
         currentSpeed = carRb.velocity.magnitude * 3.6f;
@@ -140,8 +137,8 @@ public class CarController : MonoBehaviour
     {
         gearIndex++;
 
-        if(gearIndex >= gearRatios.Length)
-            gearIndex = gearRatios.Length;
+        if(gearIndex == gearRatios.Length)
+            gearIndex = gearRatios.Length - 1;
     }
 
     // Shift transmission down a gear
@@ -156,28 +153,32 @@ public class CarController : MonoBehaviour
     // Add calculated wheel rpm to get motor torque to drive vehicle
     private void CalculateEngineSpeed()
     {
-        // Calculate Wheel Speeds
-        WheelRpm();
-        
-        engineRpm = idleRpm + (Mathf.Abs(wheelsRpm) * finalDriveRatio * gearRatios[gearIndex]) / finalDriveRatio;
+        float rpm = WheelRpm();
+
+        engineRpm = idleRpm + (rpm * gearRatios[gearIndex]);
         engineHorsePower = torqueCurve.Evaluate(engineRpm) * gearRatios[gearIndex] * accelInputFloat;
-        engineTorque = (engineHorsePower * 5252 / engineRpm) * 1.3558f;
+        engineTorque = (engineHorsePower * 5252 / engineRpm);
     }
 
     // Calculate the wheel rpm when driving
-    private void WheelRpm()
+    private float WheelRpm()
     {
         float sum = 0;
-        for(int i = 0; i < wheels.Count; i++)
+        foreach (Wheel wheel in wheels)
         {
-            if(vehicleDrivetrain == Drivetrain.Awd)
-                sum += wheels[i].wheelCollider.rpm;
-            
-            if(vehicleDrivetrain is Drivetrain.Rwd or Drivetrain.Fwd)
-                sum += wheels[i].wheelCollider.rpm * 0.5f;
+            if (vehicleDrivetrain == Drivetrain.Awd)
+                sum += wheel.wheelCollider.rpm;
+
+            if (vehicleDrivetrain == Drivetrain.Fwd)
+                if (wheel.axleOfWheel == Axle.Front)
+                    sum += wheel.wheelCollider.rpm * 0.5f;
+
+            if (vehicleDrivetrain == Drivetrain.Rwd)
+                if (wheel.axleOfWheel == Axle.Rear)
+                    sum += wheel.wheelCollider.rpm * 0.5f;
         }
 
-        wheelsRpm = sum;
+        return wheelsRpm = sum;
     }
 
     // Move the car at necessary speed with set drivetrain
