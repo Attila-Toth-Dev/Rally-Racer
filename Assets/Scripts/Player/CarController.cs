@@ -5,7 +5,8 @@ using System.Collections.Generic;
 
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
+
+#region Structs & Enums
 
 [Serializable]
 public enum Drivetrain
@@ -16,14 +17,14 @@ public enum Drivetrain
 }
 
 [Serializable]
-internal enum Axle
+public enum Axle
 {
     Front,
     Rear
 }
 
 [Serializable]
-internal struct Wheel
+public struct Wheel
 {
     public GameObject wheelGameObject;
     public WheelCollider wheelCollider;
@@ -31,33 +32,32 @@ internal struct Wheel
 }
 
 [Serializable]
-internal struct PowerDistribution
+public struct PowerDistribution
 {
     [Range(0, 1)] public float frontPower;
     [Range(0, 1)] public float rearPower;
 }
 
+#endregion
+
 public class CarController : MonoBehaviour
 {
     [Header("Controller Objects")]
     public Rigidbody carRb;
-    [SerializeField] private List<Wheel> wheels;
+    public List<Wheel> wheels;
 
     [Header("Engine Settings")]
     [SerializeField] private AnimationCurve torqueCurve;
     [SerializeField, Range(700, 1000)] private float idleRpm;
     [SerializeField, ReadOnly] private float engineRpm;
     [SerializeField, ReadOnly] private float engineHorsePower;
-    [SerializeField, ReadOnly] private float engineTorque;
     
     [Header("Drivetrain Settings")]
     [SerializeField] private Drivetrain vehicleDrivetrain;
     [SerializeField, ShowIf("vehicleDrivetrain", Drivetrain.Awd)] private PowerDistribution powerDistribution;
 
     [Header("Transmission Settings")]
-    //[SerializeField] private AnimationCurve gearRatios;
     [SerializeField] private float[] gearRatios;
-    //[SerializeField] private float finalDriveRatio;
     [SerializeField, ReadOnly] private int gearIndex = 0;
 
     [Header("Handling Settings")]
@@ -65,25 +65,21 @@ public class CarController : MonoBehaviour
     [SerializeField] private float turnSensitivity;
     [SerializeField] private float brakePower;
 
-    [Header("Input Actions")]
-    [SerializeField] private InputActionReference accelAction;
-    [SerializeField] private InputActionReference steerAction;
-    [SerializeField] private InputActionReference handBrakeAction;
-    [SerializeField] private InputActionReference shiftUp;
-    [SerializeField] private InputActionReference shiftDown;
-
-    [Header("Debugging Tools")]
-    [ReadOnly] public float currentSpeed;
-    [SerializeField, ReadOnly] private float wheelsRpm;
+    // Debugging
+    [SerializeField, ReadOnly, Foldout("Debugging")] private float currentSpeed;
+    [SerializeField, ReadOnly, Foldout("Debugging")] private float wheelsRpm;
+    [SerializeField, ReadOnly, Foldout("Debugging")] private float accelInputFloat;
+    [SerializeField, ReadOnly, Foldout("Debugging")] private float brakeInputFloat;
+    [SerializeField, ReadOnly, Foldout("Debugging")] private float steerInputFloat;
+    [SerializeField, ReadOnly, Foldout("Debugging")] private float handBrakeInput;
     
-    [Header("Input Debugging")]
-    [SerializeField, ReadOnly] private float accelInputFloat;
-    [SerializeField, ReadOnly] private float brakeInputFloat;
-    [SerializeField, ReadOnly] private float steerInputFloat;
-    [SerializeField, ReadOnly] private float handBrakeInput;
-
-
-    private float slipAngle;
+    // Inputs
+    [SerializeField, Foldout("Inputs")] private InputActionReference accelAction;
+    [SerializeField, Foldout("Inputs")] private InputActionReference steerAction;
+    [SerializeField, Foldout("Inputs")] private InputActionReference handBrakeAction;
+    [SerializeField, Foldout("Inputs")] private InputActionReference shiftUp;
+    [SerializeField, Foldout("Inputs")] private InputActionReference shiftDown;
+    
     private Vector3 centerOfMass;
 
     private void Awake()
@@ -111,12 +107,6 @@ public class CarController : MonoBehaviour
         
         // Get Current Vehicle Speed
         currentSpeed = carRb.velocity.magnitude * 3.6f;
-    }
-
-    private void GearBox()
-    {
-        
-        
     }
 
     private void FixedUpdate()
@@ -157,7 +147,6 @@ public class CarController : MonoBehaviour
 
         engineRpm = idleRpm + (rpm * gearRatios[gearIndex]);
         engineHorsePower = torqueCurve.Evaluate(engineRpm) * gearRatios[gearIndex] * accelInputFloat;
-        engineTorque = (engineHorsePower * 5252 / engineRpm);
     }
 
     // Calculate the wheel rpm when driving
@@ -211,8 +200,6 @@ public class CarController : MonoBehaviour
     // Steer the wheels on front Axle
     private void Steer()
     {
-        // MAKE INTO COROUTINE
-
         foreach (Wheel wheel in wheels)
         {
             if(wheel.axleOfWheel == Axle.Front)
@@ -269,16 +256,13 @@ public class CarController : MonoBehaviour
         // Gets the input of the braking motion from
         // from the acceleration input. Then allows the player
         // to reverse
-        if(slipAngle < 120f)
+        if(accelInputFloat < 0)
         {
-            if(accelInputFloat < 0)
-            {
-                brakeInputFloat = Mathf.Abs(accelInputFloat);
-                accelInputFloat = 0;
-            }
-            else
-                brakeInputFloat = 0;
+            brakeInputFloat = Mathf.Abs(accelInputFloat);
+            accelInputFloat = 0;
         }
+        else
+            brakeInputFloat = 0;
     }   
 
     private void OnEnable()

@@ -6,22 +6,22 @@ public class WheelCollisionSystem : MonoBehaviour
     public int raysNumber = 36;
     public float raysMaxAngle = 180f;
 
+    private CarController carController;
     private WheelCollider wheelCollider;
     private float orgRadius;
-    private CarController carController;
     
     private void Awake()
     {
         wheelCollider = GetComponent<WheelCollider>();
-        orgRadius = wheelCollider.radius;
-
         carController = GetComponentInParent<CarController>();
+
+        orgRadius = wheelCollider.radius;
     }
 
     private void Update()
     {
         float radiusOffset = 0f;
-        
+
         for(int i = 0; i <= raysNumber; i++)
         {
             Vector3 rayDirection = Quaternion.AngleAxis(wheelCollider.steerAngle, transform.up) * Quaternion.AngleAxis(i * (raysMaxAngle / raysNumber) + ((180f - raysMaxAngle) / 2f), transform.right) * transform.forward;
@@ -34,7 +34,7 @@ public class WheelCollisionSystem : MonoBehaviour
                     radiusOffset = Mathf.Max(radiusOffset, wheelCollider.radius - hit.distance);
                 }
             }
-            
+
             Debug.DrawRay(wheelModel.position, rayDirection * orgRadius, Color.green);
         }
 

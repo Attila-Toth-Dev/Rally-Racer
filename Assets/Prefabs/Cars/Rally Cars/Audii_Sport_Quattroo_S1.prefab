@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7806633303027595446}
   - component: {fileID: 365863110447717164}
-  - component: {fileID: 2717324122880301627}
+  - component: {fileID: 2504564362124358142}
   m_Layer: 7
   m_Name: wheel_RL
   m_TagString: Untagged
@@ -63,7 +63,7 @@ WheelCollider:
     m_AsymptoteValue: 0.75
     m_Stiffness: 2.4
   m_Enabled: 1
---- !u!114 &2717324122880301627
+--- !u!114 &2504564362124358142
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -72,12 +72,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1496652374899328619}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a7e8656254f84434983b10ab4fca2b3d, type: 3}
+  m_Script: {fileID: 11500000, guid: c6ac86cbc145d5e4288610856d3b14b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   wheelModel: {fileID: 1807649536857976342}
-  raysNumber: 36
-  raysMaxAngle: 180
+  raysNumber: 20
+  raysMaxAngle: 90
 --- !u!1 &1775235759212062205
 GameObject:
   m_ObjectHideFlags: 0
@@ -472,7 +472,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9029207406078489758}
   - component: {fileID: 2930323203048832408}
-  - component: {fileID: 3814544414020348043}
+  - component: {fileID: 3999017005255150148}
   m_Layer: 7
   m_Name: wheel_RR
   m_TagString: Untagged
@@ -525,7 +525,7 @@ WheelCollider:
     m_AsymptoteValue: 0.75
     m_Stiffness: 2.4
   m_Enabled: 1
---- !u!114 &3814544414020348043
+--- !u!114 &3999017005255150148
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -534,12 +534,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 7810361790262028533}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a7e8656254f84434983b10ab4fca2b3d, type: 3}
+  m_Script: {fileID: 11500000, guid: c6ac86cbc145d5e4288610856d3b14b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   wheelModel: {fileID: 3708780167755292536}
-  raysNumber: 36
-  raysMaxAngle: 180
+  raysNumber: 20
+  raysMaxAngle: 90
 --- !u!1 &8038657542107045178
 GameObject:
   m_ObjectHideFlags: 0
@@ -550,7 +550,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5021384054942284}
   - component: {fileID: 3494394723711910619}
-  - component: {fileID: 6085189276916972418}
+  - component: {fileID: 2038359425667174960}
   m_Layer: 7
   m_Name: wheel_FL
   m_TagString: Untagged
@@ -603,7 +603,7 @@ WheelCollider:
     m_AsymptoteValue: 0.75
     m_Stiffness: 2.4
   m_Enabled: 1
---- !u!114 &6085189276916972418
+--- !u!114 &2038359425667174960
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -612,12 +612,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 8038657542107045178}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a7e8656254f84434983b10ab4fca2b3d, type: 3}
+  m_Script: {fileID: 11500000, guid: c6ac86cbc145d5e4288610856d3b14b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   wheelModel: {fileID: 1661447767758853887}
-  raysNumber: 36
-  raysMaxAngle: 180
+  raysNumber: 20
+  raysMaxAngle: 90
 --- !u!1 &8484030449367306885
 GameObject:
   m_ObjectHideFlags: 0
@@ -627,8 +627,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7657205477522760294}
-  - component: {fileID: 708645780119819542}
   - component: {fileID: 7559441500698811130}
+  - component: {fileID: 6846319991008694352}
   m_Layer: 7
   m_Name: Audii_Sport_Quattroo_S1
   m_TagString: Untagged
@@ -653,7 +653,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &708645780119819542
+--- !u!54 &7559441500698811130
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8484030449367306885}
+  serializedVersion: 2
+  m_Mass: 1000
+  m_Drag: 0.1
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 3
+--- !u!114 &6846319991008694352
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -662,7 +678,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8484030449367306885}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 425cfb5958290224ebf30b706938bc0e, type: 3}
+  m_Script: {fileID: 11500000, guid: 74bef6e6d6990634589d755ea25f77f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   carRb: {fileID: 7559441500698811130}
@@ -685,120 +701,85 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 100
-      inSlope: 0.67592293
-      outSlope: 0.67592293
+      inSlope: 0.11005295
+      outSlope: 0.11005295
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.005919958
+      outWeight: 0.026000569
     - serializedVersion: 3
-      time: 754.6062
-      value: 340.3082
-      inSlope: 0.073323384
-      outSlope: 0.073323384
+      time: 7507.5073
+      value: 450
+      inSlope: 0.0014852555
+      outSlope: 0.0014852555
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.342672
-    - serializedVersion: 3
-      time: 2738.7659
-      value: 465.2339
-      inSlope: 0.025072359
-      outSlope: 0.025072359
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.28403434
-      outWeight: 0.76163137
-    - serializedVersion: 3
-      time: 7500
-      value: 550
-      inSlope: -0.00007422269
-      outSlope: -0.00007422269
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.73833305
+      inWeight: 0.050050065
+      outWeight: 0.35552302
     - serializedVersion: 3
       time: 8500
       value: 100
-      inSlope: -0.57304394
-      outSlope: -0.57304394
+      inSlope: -0.9139328
+      outSlope: -0.9139328
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.08885156
+      inWeight: 0.03153125
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  idleRpm: 740
+  idleRpm: 750
   engineRpm: 0
   engineHorsePower: 0
-  engineTorque: 0
   vehicleDrivetrain: 0
   powerDistribution:
     frontPower: 0.5
     rearPower: 0.5
   gearRatios:
   - -3.5
-  - 2.9
-  - 2.273
-  - 1.706
-  - 1.318
-  - 1.125
-  gearIndex: 1
+  - 3
+  - 2
+  - 1.526
+  - 1.167
+  - 0.963
+  gearIndex: 0
   steerCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
       value: 35
-      inSlope: 0.0018303788
-      outSlope: 0.0018303788
+      inSlope: -0.037534498
+      outSlope: -0.037534498
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.27858496
+      outWeight: 0.13282256
     - serializedVersion: 3
       time: 70
-      value: 20
-      inSlope: -0.38844565
-      outSlope: -0.38844565
+      value: 25
+      inSlope: -0.27444428
+      outSlope: -0.27444428
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.10410881
+      inWeight: 0.067369446
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  turnSensitivity: 40
-  brakePower: 60000
-  accelAction: {fileID: -4069268421021181553, guid: 596a5ed9421f3b448b1192c646989d1b, type: 3}
-  steerAction: {fileID: 5811089921689790690, guid: 596a5ed9421f3b448b1192c646989d1b, type: 3}
-  handBrakeAction: {fileID: 5217967712270376817, guid: 596a5ed9421f3b448b1192c646989d1b, type: 3}
-  shiftUp: {fileID: 7358592149169669011, guid: 596a5ed9421f3b448b1192c646989d1b, type: 3}
-  shiftDown: {fileID: 8741333784089881227, guid: 596a5ed9421f3b448b1192c646989d1b, type: 3}
+  turnSensitivity: 0.5
+  brakePower: 50000
   currentSpeed: 0
   wheelsRpm: 0
   accelInputFloat: 0
   brakeInputFloat: 0
   steerInputFloat: 0
   handBrakeInput: 0
---- !u!54 &7559441500698811130
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8484030449367306885}
-  serializedVersion: 2
-  m_Mass: 1000
-  m_Drag: 0.1
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 3
+  accelAction: {fileID: -4069268421021181553, guid: 596a5ed9421f3b448b1192c646989d1b, type: 3}
+  steerAction: {fileID: 5811089921689790690, guid: 596a5ed9421f3b448b1192c646989d1b, type: 3}
+  handBrakeAction: {fileID: 5217967712270376817, guid: 596a5ed9421f3b448b1192c646989d1b, type: 3}
+  shiftUp: {fileID: 7358592149169669011, guid: 596a5ed9421f3b448b1192c646989d1b, type: 3}
+  shiftDown: {fileID: 8741333784089881227, guid: 596a5ed9421f3b448b1192c646989d1b, type: 3}
 --- !u!1 &8921600399207261848
 GameObject:
   m_ObjectHideFlags: 0
@@ -892,7 +873,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6053442331023455986}
   - component: {fileID: 768864308171011750}
-  - component: {fileID: 8752967055445030380}
+  - component: {fileID: 5988849053846372894}
   m_Layer: 7
   m_Name: wheel_FR
   m_TagString: Untagged
@@ -945,7 +926,7 @@ WheelCollider:
     m_AsymptoteValue: 0.75
     m_Stiffness: 2.4
   m_Enabled: 1
---- !u!114 &8752967055445030380
+--- !u!114 &5988849053846372894
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -954,12 +935,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 9020469523333199146}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a7e8656254f84434983b10ab4fca2b3d, type: 3}
+  m_Script: {fileID: 11500000, guid: c6ac86cbc145d5e4288610856d3b14b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   wheelModel: {fileID: 2052179716230797183}
-  raysNumber: 36
-  raysMaxAngle: 180
+  raysNumber: 20
+  raysMaxAngle: 90
 --- !u!1 &9191497294672667663
 GameObject:
   m_ObjectHideFlags: 0
