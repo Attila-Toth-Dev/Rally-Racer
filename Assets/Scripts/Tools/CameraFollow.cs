@@ -24,16 +24,34 @@ namespace Tools
 		private Vector3 desiredPosition;
 		private Transform cameraPos;
 
-		private void Start() => cameraPos = GetComponent<Transform>();
+		private void Start()
+		{
+			// Get Camera Pos
+			cameraPos = GetComponent<Transform>();
+			
+			// Get Target Pos
+			if(targetPos == null)
+			{
+				try
+				{
+					targetPos = FindObjectOfType<CarController>().transform;
+				}
+
+				catch(Exception e)
+				{
+					Console.WriteLine(e);
+
+					throw;
+				}	
+			}
+		}
 
 		private void FixedUpdate()
 		{
 			// Check for valid target
 			if(targetPos != null)
 				desiredPosition = targetPos.position + targetPos.TransformDirection(Quaternion.Euler(elevationAngle, orbitalAngle, 0f) * (new Vector3(0, 0, -followDistance)));
-			else
-				Debug.LogWarning("CREATE YOUR OWN EXCEPTION ERROR IDIOT!!!");
-			
+
 			// Movement Smoothing
 			cameraPos.position = isMovementSmoothing ? Vector3.Lerp(cameraPos.position, desiredPosition, Time.deltaTime * 5.0f) : desiredPosition;
 			

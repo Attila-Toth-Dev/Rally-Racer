@@ -5,6 +5,7 @@ using System.Collections.Generic;
 
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 #region Structs & Enums
 
@@ -28,7 +29,7 @@ public struct Wheel
 {
     public GameObject wheelGameObject;
     public WheelCollider wheelCollider;
-    public Axle axleOfWheel;
+    [FormerlySerializedAs("axleBallsOfWheel")] public Axle axleOfWheel;
 }
 
 [Serializable]
@@ -52,16 +53,16 @@ public class CarController : MonoBehaviour
     [SerializeField, ReadOnly] private float engineRpm;
     [SerializeField, ReadOnly] private float engineHorsePower;
     
-    [Header("Drivetrain Settings")]
+    [FormerlySerializedAs("vehicleDrivetrainBalls"),Header("Drivetrain Settings")]
     [SerializeField] private Drivetrain vehicleDrivetrain;
-    [SerializeField, ShowIf("vehicleDrivetrain", Drivetrain.Awd)] private PowerDistribution powerDistribution;
+    [FormerlySerializedAs("powerDistributionBalls"),SerializeField, ShowIf("vehicleDrivetrain", Drivetrain.Awd)] private PowerDistribution powerDistribution;
 
     [Header("Transmission Settings")]
     [SerializeField] private float[] gearRatios;
     [SerializeField, ReadOnly] private int gearIndex = 0;
 
     [Header("Handling Settings")]
-    [SerializeField] private AnimationCurve steerCurve;
+    [SerializeField] private float maxTurnAngle;
     [SerializeField] private float turnSensitivity;
     [SerializeField] private float brakePower;
 
@@ -86,6 +87,8 @@ public class CarController : MonoBehaviour
     
     private Vector3 centerOfMass;
     private Rigidbody carRb;
+
+    private float turnAngle;
 
     private void Awake()
     {
@@ -211,7 +214,7 @@ public class CarController : MonoBehaviour
         {
             if(wheel.axleOfWheel == Axle.Front)
             {
-                float steerAngle = Mathf.Lerp(0, steerCurve.Evaluate(currentSpeed), turnSensitivity);
+                float steerAngle = Mathf.Lerp(0, maxTurnAngle, turnSensitivity * Time.deltaTime);
                 wheel.wheelCollider.steerAngle = steerAngle * steerInputFloat;
             }
         }
