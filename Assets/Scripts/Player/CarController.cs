@@ -40,10 +40,10 @@ public struct PowerDistribution
 
 #endregion
 
+[RequireComponent(typeof(Rigidbody))]
 public class CarController : MonoBehaviour
 {
-    [Header("Controller Objects")]
-    public Rigidbody carRb;
+    [Header("Wheel Objects")]
     public List<Wheel> wheels;
 
     [Header("Engine Settings")]
@@ -65,6 +65,8 @@ public class CarController : MonoBehaviour
     [SerializeField] private float turnSensitivity;
     [SerializeField] private float brakePower;
 
+    #region Inputs & Debugging
+
     // Debugging
     [SerializeField, ReadOnly, Foldout("Debugging")] private float currentSpeed;
     [SerializeField, ReadOnly, Foldout("Debugging")] private float wheelsRpm;
@@ -79,8 +81,11 @@ public class CarController : MonoBehaviour
     [SerializeField, Foldout("Inputs")] private InputActionReference handBrakeAction;
     [SerializeField, Foldout("Inputs")] private InputActionReference shiftUp;
     [SerializeField, Foldout("Inputs")] private InputActionReference shiftDown;
+
+    #endregion
     
     private Vector3 centerOfMass;
+    private Rigidbody carRb;
 
     private void Awake()
     {
@@ -90,6 +95,8 @@ public class CarController : MonoBehaviour
 
     private void Start()
     {
+        carRb = GetComponent<Rigidbody>();
+        
         carRb.centerOfMass = centerOfMass;
         gearIndex = 1;
     }
