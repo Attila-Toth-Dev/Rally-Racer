@@ -1154,42 +1154,42 @@ MonoBehaviour:
   - wheelGameObject: {fileID: 3313327216589602713}
     wheelCollider: {fileID: 3984442375347927973}
     axleOfWheel: 1
-  torqueCurve:
+  horsePowerCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
       time: 0
       value: 100
-      inSlope: 0.15614036
-      outSlope: 0.15614036
+      inSlope: 0.06728866
+      outSlope: 0.06728866
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.058058057
+      inWeight: 0
+      outWeight: 0.12171441
     - serializedVersion: 3
       time: 4500
-      value: 350
+      value: 300
       inSlope: 0
       outSlope: 0
-      tangentMode: 136
+      tangentMode: 0
       weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
+      inWeight: 0
+      outWeight: 0
     - serializedVersion: 3
       time: 5500
       value: 100
-      inSlope: -0.43915913
-      outSlope: -0.43915913
+      inSlope: -0.38550994
+      outSlope: -0.38550994
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.03153174
-      outWeight: 0.33333334
+      inWeight: 0.03267966
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  idleRpm: 700
   engineRpm: 0
-  engineHorsePower: 0
+  horsePower: 0
+  torquePower: 0
   vehicleDrivetrain: 0
   powerDistribution:
     frontPower: 0.5
@@ -1203,7 +1203,7 @@ MonoBehaviour:
   - 0.838
   gearIndex: 0
   maxTurnAngle: 30
-  turnSensitivity: 40
+  turnSensitivity: 20
   brakePower: 50000
   currentSpeed: 0
   wheelsRpm: 0

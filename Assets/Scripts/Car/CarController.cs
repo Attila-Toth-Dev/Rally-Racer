@@ -48,14 +48,14 @@ public class CarController : MonoBehaviour
     public List<Wheel> wheels;
 
     [Header("Engine Settings")]
-    [SerializeField] private AnimationCurve torqueCurve;
-    [SerializeField, Range(700, 1000)] private float idleRpm;
+    [SerializeField] private AnimationCurve horsePowerCurve;
     [SerializeField, ReadOnly] private float engineRpm;
-    [SerializeField, ReadOnly] private float engineHorsePower;
+    [SerializeField, ReadOnly] private float horsePower;
+    [SerializeField, ReadOnly] private float torquePower; 
     
-    [FormerlySerializedAs("vehicleDrivetrainBalls"),Header("Drivetrain Settings")]
+    [Header("Drivetrain Settings")]
     [SerializeField] private Drivetrain vehicleDrivetrain;
-    [FormerlySerializedAs("powerDistributionBalls"),SerializeField, ShowIf("vehicleDrivetrain", Drivetrain.Awd)] private PowerDistribution powerDistribution;
+    [SerializeField, ShowIf("vehicleDrivetrain", Drivetrain.Awd)] private PowerDistribution powerDistribution;
 
     [Header("Transmission Settings")]
     [SerializeField] private float[] gearRatios;
@@ -88,6 +88,7 @@ public class CarController : MonoBehaviour
     private Rigidbody carRb;
     private Vector3 centreOfMass;
 
+    private float idleRpm = 1000;
     private float turnAngle;
 
     private void Awake()
@@ -156,7 +157,8 @@ public class CarController : MonoBehaviour
         float rpm = WheelRpm();
 
         engineRpm = idleRpm + (rpm * gearRatios[gearIndex]);
-        engineHorsePower = torqueCurve.Evaluate(engineRpm) * gearRatios[gearIndex] * accelInputFloat;
+        horsePower = horsePowerCurve.Evaluate(engineRpm) * gearRatios[gearIndex] * accelInputFloat;
+        torquePower = (horsePower * 5252) / engineRpm;
     }
 
     // Calculate the wheel rpm when driving
@@ -189,21 +191,21 @@ public class CarController : MonoBehaviour
             if(vehicleDrivetrain == Drivetrain.Awd)
             {
                 if(wheel.axleOfWheel == Axle.Front)
-                    wheel.wheelCollider.motorTorque = engineHorsePower * powerDistribution.frontPower;
+                    wheel.wheelCollider.motorTorque = torquePower * powerDistribution.frontPower;
 
                 if (wheel.axleOfWheel == Axle.Rear)
-                    wheel.wheelCollider.motorTorque = engineHorsePower * powerDistribution.rearPower;
+                    wheel.wheelCollider.motorTorque = torquePower * powerDistribution.rearPower;
             }
 
             // Movement for RWD Cars
             if (vehicleDrivetrain == Drivetrain.Rwd)
                 if(wheel.axleOfWheel == Axle.Rear)
-                    wheel.wheelCollider.motorTorque = engineHorsePower * 0.5f;
+                    wheel.wheelCollider.motorTorque = torquePower * 0.5f;
 
             // Movement for FWD Cars
             if(vehicleDrivetrain == Drivetrain.Fwd)
                 if(wheel.axleOfWheel == Axle.Front)
-                    wheel.wheelCollider.motorTorque = engineHorsePower * 0.5f;
+                    wheel.wheelCollider.motorTorque = torquePower * 0.5f;
         }
     }
 
