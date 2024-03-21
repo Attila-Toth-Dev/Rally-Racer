@@ -85,8 +85,8 @@ public class CarController : MonoBehaviour
 
     #endregion
     
-    private Vector3 centerOfMass;
     private Rigidbody carRb;
+    private Vector3 centreOfMass;
 
     private float turnAngle;
 
@@ -99,8 +99,8 @@ public class CarController : MonoBehaviour
     private void Start()
     {
         carRb = GetComponent<Rigidbody>();
+        carRb.centerOfMass = centreOfMass;
         
-        carRb.centerOfMass = centerOfMass;
         gearIndex = 1;
     }
 
