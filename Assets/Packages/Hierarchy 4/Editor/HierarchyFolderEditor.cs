@@ -1,24 +1,28 @@
-﻿using UnityEditor;
-
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityEditor;
+using UnityEditor.UIElements;
 
-using Debug = System.Diagnostics.Debug;
-
-namespace Hierarchy2
+namespace TNTD.Hierarchy4
 {
     [CustomEditor(typeof(HierarchyFolder))]
     internal class HierarchyFolderEditor : Editor
     {
+        private void OnEnable()
+        {
+        }
+
         public override VisualElement CreateInspectorGUI()
         {
-            HierarchyFolder script = target as HierarchyFolder;
+            var script = target as HierarchyFolder;
 
-            VisualElement root = new();
+            var root = new VisualElement();
 
-            IMGUIContainer imguiContainer = new(() =>
+            IMGUIContainer imguiContainer = new IMGUIContainer(() =>
             {
-                Debug.Assert(script != null, nameof(script) + " != null");
                 script.flattenMode = (HierarchyFolder.FlattenMode) EditorGUILayout.EnumPopup("Flatten Mode", script.flattenMode);
                 if (script.flattenMode != HierarchyFolder.FlattenMode.None)
                 {
@@ -31,15 +35,15 @@ namespace Hierarchy2
             return root;
         }
 
-        [MenuItem("Tools/Hierarchy 2/Hierarchy Folder", priority = 0)]
-        [MenuItem("GameObject/Hierarchy 2/Hierarchy Folder", priority = 0)]
-        private static void CreateInstance(MenuCommand _command)
+        [MenuItem("Tools/Hierarchy 4/Hierarchy Folder", priority = 0)]
+        [MenuItem("GameObject/Hierarchy Folder", priority = 0)]
+        static void CreateInstance(UnityEditor.MenuCommand command)
         {
-            GameObject gameObject = new("Folder", typeof(HierarchyFolder));
+            GameObject gameObject = new GameObject("Folder", new Type[1] {typeof(HierarchyFolder)});
 
             Undo.RegisterCreatedObjectUndo(gameObject, "Create Hierarchy Folder");
-            if (_command.context)
-                Undo.SetTransformParent(gameObject.transform, ((GameObject) _command.context).transform, "Create Hierarchy Folder");
+            if (command.context)
+                Undo.SetTransformParent(gameObject.transform, ((GameObject) command.context).transform, "Create Hierarchy Folder");
 
             Selection.activeTransform = gameObject.transform;
         }
