@@ -327,6 +327,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2356917779296233017, guid: cad4a85e69df10d458849abbe12d4fbb, type: 3}
+      propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6258787366499976284, guid: cad4a85e69df10d458849abbe12d4fbb, type: 3}
       propertyPath: m_Name
       value: Hilux
@@ -373,6 +377,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7565799884195863937, guid: cad4a85e69df10d458849abbe12d4fbb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8844274231042598991, guid: cad4a85e69df10d458849abbe12d4fbb, type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
