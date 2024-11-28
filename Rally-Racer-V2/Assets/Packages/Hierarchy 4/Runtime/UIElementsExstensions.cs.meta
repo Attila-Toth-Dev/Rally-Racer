@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 4507fa051b982c14fbad087a44b2da52
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 242660
+  packageName: Hierarchy 4
+  packageVersion: 1.4.2.1
+  assetPath: Assets/Hierarchy 4/Runtime/UIElementsExstensions.cs
+  uploadId: 597429

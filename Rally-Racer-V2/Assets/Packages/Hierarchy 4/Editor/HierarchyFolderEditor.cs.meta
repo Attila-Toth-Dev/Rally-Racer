@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 0e784e5dab34294449a18bdedb9ecafe
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 242660
+  packageName: Hierarchy 4
+  packageVersion: 1.4.2.1
+  assetPath: Assets/Hierarchy 4/Editor/HierarchyFolderEditor.cs
+  uploadId: 597429

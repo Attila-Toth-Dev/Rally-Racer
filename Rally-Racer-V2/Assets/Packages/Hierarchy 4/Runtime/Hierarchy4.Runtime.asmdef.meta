@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 301929b7186ac9542b7511b3e4692309
+AssemblyDefinitionImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 242660
+  packageName: Hierarchy 4
+  packageVersion: 1.4.2.1
+  assetPath: Assets/Hierarchy 4/Runtime/Hierarchy4.Runtime.asmdef
+  uploadId: 597429
