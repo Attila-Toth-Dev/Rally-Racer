@@ -334,6 +334,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2034001042457177876}
   - component: {fileID: 3984442375347927973}
+  - component: {fileID: 6271068871943938848}
   m_Layer: 7
   m_Name: RR_Colliders
   m_TagString: Untagged
@@ -386,6 +387,20 @@ WheelCollider:
     m_AsymptoteValue: 0.75
     m_Stiffness: 1
   m_Enabled: 1
+--- !u!114 &6271068871943938848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2693005100947725869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b71c59c851d20d42acaed78659438fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  raysNumber: 36
+  raysMaxAngle: 180
 --- !u!1 &3172392734024849295
 GameObject:
   m_ObjectHideFlags: 0
@@ -396,6 +411,7 @@ GameObject:
   m_Component:
   - component: {fileID: 557565847772049711}
   - component: {fileID: 3848398109129908729}
+  - component: {fileID: 311377050962593482}
   m_Layer: 7
   m_Name: FL_Colliders
   m_TagString: Untagged
@@ -448,6 +464,20 @@ WheelCollider:
     m_AsymptoteValue: 0.75
     m_Stiffness: 1
   m_Enabled: 1
+--- !u!114 &311377050962593482
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3172392734024849295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b71c59c851d20d42acaed78659438fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  raysNumber: 36
+  raysMaxAngle: 180
 --- !u!1 &3313327216589602713
 GameObject:
   m_ObjectHideFlags: 0
@@ -541,6 +571,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7264850971937509767}
   - component: {fileID: 4713914792862401692}
+  - component: {fileID: 3737131874169046724}
   m_Layer: 7
   m_Name: FR_Colliders
   m_TagString: Untagged
@@ -593,6 +624,20 @@ WheelCollider:
     m_AsymptoteValue: 0.75
     m_Stiffness: 1
   m_Enabled: 1
+--- !u!114 &3737131874169046724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3497342630806878704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b71c59c851d20d42acaed78659438fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  raysNumber: 36
+  raysMaxAngle: 180
 --- !u!1 &3500999469960263776
 GameObject:
   m_ObjectHideFlags: 0
@@ -1491,6 +1536,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1580083479584610336}
   - component: {fileID: 888607165647764377}
+  - component: {fileID: 1233150916673498815}
   m_Layer: 7
   m_Name: RL_Colliders
   m_TagString: Untagged
@@ -1543,6 +1589,20 @@ WheelCollider:
     m_AsymptoteValue: 0.75
     m_Stiffness: 1
   m_Enabled: 1
+--- !u!114 &1233150916673498815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8302621500117036451}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b71c59c851d20d42acaed78659438fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  raysNumber: 36
+  raysMaxAngle: 180
 --- !u!1 &8746712699175987805
 GameObject:
   m_ObjectHideFlags: 0
