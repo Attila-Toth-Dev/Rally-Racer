@@ -227,7 +227,7 @@ Transform:
   m_GameObject: {fileID: 1073433014242584084}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.4112673, y: -1.0932364, z: -1.9191253}
+  m_LocalPosition: {x: -1.4112673, y: 0.4599998, z: -1.9191253}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -241,13 +241,13 @@ WheelCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1073433014242584084}
   serializedVersion: 2
-  m_Center: {x: 0, y: 0.15, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}
   m_Radius: 0.78
   m_SuspensionSpring:
     spring: 35000
     damper: 4500
     targetPosition: 0.5
-  m_SuspensionDistance: 0.3
+  m_SuspensionDistance: 3.11
   m_ForceAppPointDistance: 0
   m_Mass: 20
   m_WheelDampingRate: 0.25
@@ -299,8 +299,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wheelObject: {fileID: 3491064493841159180}
-  raysNumber: 15
-  raysMaxAngle: 180
+  raysNumber: 40
+  raysMaxAngle: 145
+  wheelWidth: 0.7
 --- !u!1 &2066951088050897358
 GameObject:
   m_ObjectHideFlags: 0
@@ -448,7 +449,7 @@ Transform:
   m_GameObject: {fileID: 2670851394928764676}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.4112654, y: -1.0932362, z: 1.8630077}
+  m_LocalPosition: {x: 1.4112654, y: 0.46000004, z: 1.8630077}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -462,13 +463,13 @@ WheelCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2670851394928764676}
   serializedVersion: 2
-  m_Center: {x: 0, y: 0.15, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}
   m_Radius: 0.78
   m_SuspensionSpring:
     spring: 35000
     damper: 4500
     targetPosition: 0.5
-  m_SuspensionDistance: 0.3
+  m_SuspensionDistance: 3.11
   m_ForceAppPointDistance: 0
   m_Mass: 20
   m_WheelDampingRate: 0.25
@@ -520,8 +521,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wheelObject: {fileID: 5652207301448117261}
-  raysNumber: 15
-  raysMaxAngle: 180
+  raysNumber: 40
+  raysMaxAngle: 145
+  wheelWidth: 0.7
 --- !u!1 &4091891462164880090
 GameObject:
   m_ObjectHideFlags: 0
@@ -1056,7 +1058,7 @@ Transform:
   m_GameObject: {fileID: 6763983741683446268}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.4112654, y: -1.0932364, z: -1.9191253}
+  m_LocalPosition: {x: 1.4112654, y: 0.4599998, z: -1.9191253}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1070,13 +1072,13 @@ WheelCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6763983741683446268}
   serializedVersion: 2
-  m_Center: {x: 0, y: 0.15, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}
   m_Radius: 0.78
   m_SuspensionSpring:
     spring: 35000
     damper: 4500
     targetPosition: 0.5
-  m_SuspensionDistance: 0.3
+  m_SuspensionDistance: 3.11
   m_ForceAppPointDistance: 0
   m_Mass: 20
   m_WheelDampingRate: 0.25
@@ -1128,8 +1130,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wheelObject: {fileID: 987709131256996674}
-  raysNumber: 15
-  raysMaxAngle: 180
+  raysNumber: 40
+  raysMaxAngle: 145
+  wheelWidth: 0.7
 --- !u!1 &7720694230030840320
 GameObject:
   m_ObjectHideFlags: 0
@@ -1158,7 +1161,7 @@ Transform:
   m_GameObject: {fileID: 7720694230030840320}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.4112673, y: -1.0932362, z: 1.8630077}
+  m_LocalPosition: {x: -1.4112673, y: 0.46, z: 1.8630077}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1172,13 +1175,13 @@ WheelCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7720694230030840320}
   serializedVersion: 2
-  m_Center: {x: 0, y: 0.15, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}
   m_Radius: 0.78
   m_SuspensionSpring:
     spring: 35000
     damper: 4500
     targetPosition: 0.5
-  m_SuspensionDistance: 0.3
+  m_SuspensionDistance: 3.11
   m_ForceAppPointDistance: 0
   m_Mass: 20
   m_WheelDampingRate: 0.25
@@ -1230,8 +1233,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   wheelObject: {fileID: 9087170141091286449}
-  raysNumber: 15
-  raysMaxAngle: 180
+  raysNumber: 40
+  raysMaxAngle: 145
+  wheelWidth: 0.7
 --- !u!1 &8992433214282902275
 GameObject:
   m_ObjectHideFlags: 0
