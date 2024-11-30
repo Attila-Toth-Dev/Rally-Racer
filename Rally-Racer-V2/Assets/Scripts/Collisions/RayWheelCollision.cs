@@ -57,14 +57,14 @@ public class RayWheelCollision : MonoBehaviour
             Vector3 rayDirection = Quaternion.AngleAxis(_wheelCollider.steerAngle, transform.up) * Quaternion.AngleAxis(i * (raysMaxAngle / raysNumber) + ((180f - raysMaxAngle) / 2f), transform.right) * transform.forward;
             
             // Handles the radius of the wheel collider with raycast
-            if(Physics.Raycast(wheelObject.position + wheelObject.right * wheelWidth * .5f, rayDirection, out RaycastHit raycastHit, _wheelCollider.radius)  && !raycastHit.collider.isTrigger)
+            if(Physics.Raycast(wheelObject.position + wheelObject.right * (wheelWidth * .5f), rayDirection, out RaycastHit raycastHit, _wheelCollider.radius)  && !raycastHit.collider.isTrigger)
             {
-                Debug.DrawLine(wheelObject.position + wheelObject.right * wheelWidth * .5f, raycastHit.point, Color.red);
+                Debug.DrawLine(wheelObject.position + wheelObject.right * (wheelWidth * .5f), raycastHit.point, Color.red);
                 
                 _radiusOffset = Mathf.Max(_radiusOffset, _wheelCollider.radius - raycastHit.distance);
             }
             
-            Debug.DrawRay(wheelObject.position + wheelObject.right * wheelWidth * .5f, rayDirection * _orgRadius, Color.green);
+            Debug.DrawRay(wheelObject.position + wheelObject.right * (wheelWidth * .5f), rayDirection * _orgRadius, Color.green);
         }
         
         _wheelCollider.radius = Mathf.LerpUnclamped(_wheelCollider.radius, _orgRadius + _radiusOffset, Time.deltaTime * 5f);
@@ -77,14 +77,14 @@ public class RayWheelCollision : MonoBehaviour
             Vector3 rayDirection = Quaternion.AngleAxis(_wheelCollider.steerAngle, transform.up) * Quaternion.AngleAxis(i * (raysMaxAngle / raysNumber) + ((180f - raysMaxAngle) / 2f), transform.right) * transform.forward;
             
             // Handles the radius of the wheel collider with raycast
-            if(Physics.Raycast(wheelObject.position - wheelObject.right * wheelWidth * .5f, rayDirection, out RaycastHit raycastHit, _wheelCollider.radius)  && !raycastHit.collider.isTrigger)
+            if(Physics.Raycast(wheelObject.position - wheelObject.right * (wheelWidth * .5f), rayDirection, out RaycastHit raycastHit, _wheelCollider.radius)  && !raycastHit.collider.isTrigger)
             {
-                Debug.DrawLine(wheelObject.position - wheelObject.right * wheelWidth * .5f, raycastHit.point, Color.red);
+                Debug.DrawLine(wheelObject.position - wheelObject.right * (wheelWidth * .5f), raycastHit.point, Color.red);
                 
                 _radiusOffset = Mathf.Max(_radiusOffset, _wheelCollider.radius - raycastHit.distance);
             }
             
-            Debug.DrawRay(wheelObject.position - wheelObject.right * wheelWidth * .5f, rayDirection * _orgRadius, Color.green);
+            Debug.DrawRay(wheelObject.position - wheelObject.right * (wheelWidth * .5f), rayDirection * _orgRadius, Color.green);
         }
         
         _wheelCollider.radius = Mathf.LerpUnclamped(_wheelCollider.radius, _orgRadius + _radiusOffset, Time.deltaTime * 10f);

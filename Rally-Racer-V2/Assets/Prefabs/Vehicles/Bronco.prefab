@@ -211,6 +211,7 @@ GameObject:
   - component: {fileID: 1069911864719807619}
   - component: {fileID: 2626932554882457418}
   - component: {fileID: 9151337014791034403}
+  - component: {fileID: 9051156372562903843}
   m_Layer: 7
   m_Name: RL Wheel
   m_TagString: Untagged
@@ -244,13 +245,13 @@ WheelCollider:
   m_Center: {x: 0, y: 0, z: 0}
   m_Radius: 0.78
   m_SuspensionSpring:
-    spring: 35000
+    spring: 20000
     damper: 4500
     targetPosition: 0.5
   m_SuspensionDistance: 3.11
   m_ForceAppPointDistance: 0
   m_Mass: 20
-  m_WheelDampingRate: 0.25
+  m_WheelDampingRate: 0.1
   m_ForwardFriction:
     m_ExtremumSlip: 0.4
     m_ExtremumValue: 1
@@ -293,7 +294,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1073433014242584084}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9965de0620daff8498ff5bbd66da4e3c, type: 3}
   m_Name: 
@@ -302,6 +303,22 @@ MonoBehaviour:
   raysNumber: 40
   raysMaxAngle: 145
   wheelWidth: 0.7
+--- !u!114 &9051156372562903843
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1073433014242584084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 526c09e9122140ca808c03527f3013fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wheelObject: {fileID: 3491064493841159180}
+  raysNumber: 5
+  raysMaxAngle: 100
+  sphereWidth: 0.4
 --- !u!1 &2066951088050897358
 GameObject:
   m_ObjectHideFlags: 0
@@ -433,6 +450,7 @@ GameObject:
   - component: {fileID: 2607173506210373955}
   - component: {fileID: 7313044585725090091}
   - component: {fileID: 8259165615132842431}
+  - component: {fileID: 7958120360448163731}
   m_Layer: 7
   m_Name: FR Wheel
   m_TagString: Untagged
@@ -466,13 +484,13 @@ WheelCollider:
   m_Center: {x: 0, y: 0, z: 0}
   m_Radius: 0.78
   m_SuspensionSpring:
-    spring: 35000
+    spring: 20000
     damper: 4500
     targetPosition: 0.5
   m_SuspensionDistance: 3.11
   m_ForceAppPointDistance: 0
   m_Mass: 20
-  m_WheelDampingRate: 0.25
+  m_WheelDampingRate: 0.1
   m_ForwardFriction:
     m_ExtremumSlip: 0.4
     m_ExtremumValue: 1
@@ -515,7 +533,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2670851394928764676}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9965de0620daff8498ff5bbd66da4e3c, type: 3}
   m_Name: 
@@ -524,6 +542,22 @@ MonoBehaviour:
   raysNumber: 40
   raysMaxAngle: 145
   wheelWidth: 0.7
+--- !u!114 &7958120360448163731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2670851394928764676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 526c09e9122140ca808c03527f3013fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wheelObject: {fileID: 5652207301448117261}
+  raysNumber: 5
+  raysMaxAngle: 100
+  sphereWidth: 0.4
 --- !u!1 &4091891462164880090
 GameObject:
   m_ObjectHideFlags: 0
@@ -1042,6 +1076,7 @@ GameObject:
   - component: {fileID: 5599249972332611683}
   - component: {fileID: 1938383601309803115}
   - component: {fileID: 8324164690087927936}
+  - component: {fileID: 6979335662897742625}
   m_Layer: 7
   m_Name: RR Wheel
   m_TagString: Untagged
@@ -1075,13 +1110,13 @@ WheelCollider:
   m_Center: {x: 0, y: 0, z: 0}
   m_Radius: 0.78
   m_SuspensionSpring:
-    spring: 35000
+    spring: 20000
     damper: 4500
     targetPosition: 0.5
   m_SuspensionDistance: 3.11
   m_ForceAppPointDistance: 0
   m_Mass: 20
-  m_WheelDampingRate: 0.25
+  m_WheelDampingRate: 0.1
   m_ForwardFriction:
     m_ExtremumSlip: 0.4
     m_ExtremumValue: 1
@@ -1124,7 +1159,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6763983741683446268}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9965de0620daff8498ff5bbd66da4e3c, type: 3}
   m_Name: 
@@ -1133,6 +1168,22 @@ MonoBehaviour:
   raysNumber: 40
   raysMaxAngle: 145
   wheelWidth: 0.7
+--- !u!114 &6979335662897742625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6763983741683446268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 526c09e9122140ca808c03527f3013fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wheelObject: {fileID: 987709131256996674}
+  raysNumber: 5
+  raysMaxAngle: 100
+  sphereWidth: 0.4
 --- !u!1 &7720694230030840320
 GameObject:
   m_ObjectHideFlags: 0
@@ -1145,6 +1196,7 @@ GameObject:
   - component: {fileID: 7601751094667700533}
   - component: {fileID: 2981216521273404852}
   - component: {fileID: 4891320985624338436}
+  - component: {fileID: 573876266961026746}
   m_Layer: 7
   m_Name: FL Wheel
   m_TagString: Untagged
@@ -1178,13 +1230,13 @@ WheelCollider:
   m_Center: {x: 0, y: 0, z: 0}
   m_Radius: 0.78
   m_SuspensionSpring:
-    spring: 35000
+    spring: 20000
     damper: 4500
     targetPosition: 0.5
   m_SuspensionDistance: 3.11
   m_ForceAppPointDistance: 0
   m_Mass: 20
-  m_WheelDampingRate: 0.25
+  m_WheelDampingRate: 0.1
   m_ForwardFriction:
     m_ExtremumSlip: 0.4
     m_ExtremumValue: 1
@@ -1227,7 +1279,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7720694230030840320}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9965de0620daff8498ff5bbd66da4e3c, type: 3}
   m_Name: 
@@ -1236,6 +1288,22 @@ MonoBehaviour:
   raysNumber: 40
   raysMaxAngle: 145
   wheelWidth: 0.7
+--- !u!114 &573876266961026746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7720694230030840320}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 526c09e9122140ca808c03527f3013fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wheelObject: {fileID: 9087170141091286449}
+  raysNumber: 5
+  raysMaxAngle: 100
+  sphereWidth: 0.4
 --- !u!1 &8992433214282902275
 GameObject:
   m_ObjectHideFlags: 0
