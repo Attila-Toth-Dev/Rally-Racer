@@ -434,8 +434,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68fe7e1f72222464cada6c620d6970c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  object: {fileID: 768606476}
-  offset: {x: 0, y: 2, z: -5}
+  target: {fileID: 768606476}
+  followDistance: 10
+  elevationAngle: 6
+  orbitalAngle: 0
+  isMovementSmoothing: 0
+  isRotationSmoothing: 0
+  rotationSmoothing: 5
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
