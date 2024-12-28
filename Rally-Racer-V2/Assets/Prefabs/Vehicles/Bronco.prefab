@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3417746989295854242}
   - component: {fileID: 1620330436138178676}
   - component: {fileID: 340293531063739765}
-  - component: {fileID: 5016123371296805979}
+  - component: {fileID: 1079093578876773709}
   m_Layer: 6
   m_Name: FR Wheel
   m_TagString: Untagged
@@ -110,7 +110,7 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -5285890351505382773, guid: 8582e09ba17ffc24e9510ec53a0eb071, type: 3}
---- !u!114 &5016123371296805979
+--- !u!114 &1079093578876773709
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -119,10 +119,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 140775649329491478}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 588aad37e750b72438c46c421eba14fd, type: 3}
+  m_Script: {fileID: 11500000, guid: dc6b76f3b0ce4301a6ec67c2d984c535, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wheel: {fileID: 0}
+  wheelObject: {fileID: 0}
+  axle: 0
 --- !u!1 &722648198210430567
 GameObject:
   m_ObjectHideFlags: 0
@@ -308,7 +309,7 @@ WheelCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_ProvidesContacts: 0
 --- !u!114 &2626932554882457418
 MonoBehaviour:
@@ -547,7 +548,7 @@ WheelCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_ProvidesContacts: 0
 --- !u!114 &7313044585725090091
 MonoBehaviour:
@@ -640,7 +641,7 @@ GameObject:
   - component: {fileID: 8587523160092912237}
   - component: {fileID: 7464379333876442238}
   - component: {fileID: 7572800194528056563}
-  - component: {fileID: 904064002507698622}
+  - component: {fileID: 6388476739783073931}
   m_Layer: 6
   m_Name: RL Wheel
   m_TagString: Untagged
@@ -738,7 +739,7 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -2350240911532243523, guid: 8582e09ba17ffc24e9510ec53a0eb071, type: 3}
---- !u!114 &904064002507698622
+--- !u!114 &6388476739783073931
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -747,10 +748,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 4201254521903086258}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 588aad37e750b72438c46c421eba14fd, type: 3}
+  m_Script: {fileID: 11500000, guid: dc6b76f3b0ce4301a6ec67c2d984c535, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wheel: {fileID: 0}
+  wheelObject: {fileID: 0}
+  axle: 0
 --- !u!1 &4408178031400925608
 GameObject:
   m_ObjectHideFlags: 0
@@ -796,7 +798,7 @@ GameObject:
   - component: {fileID: 8759914357161479332}
   - component: {fileID: 325755050628219423}
   - component: {fileID: 5627313562420526629}
-  - component: {fileID: 4054051896184497511}
+  - component: {fileID: 650887423829968456}
   m_Layer: 6
   m_Name: RR Wheel
   m_TagString: Untagged
@@ -894,7 +896,7 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -840264350860921930, guid: 8582e09ba17ffc24e9510ec53a0eb071, type: 3}
---- !u!114 &4054051896184497511
+--- !u!114 &650887423829968456
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -903,10 +905,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 4449612324394037565}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 588aad37e750b72438c46c421eba14fd, type: 3}
+  m_Script: {fileID: 11500000, guid: dc6b76f3b0ce4301a6ec67c2d984c535, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wheel: {fileID: 0}
+  wheelObject: {fileID: 0}
+  axle: 0
 --- !u!1 &5326267882346532541
 GameObject:
   m_ObjectHideFlags: 0
@@ -1101,7 +1104,7 @@ GameObject:
   - component: {fileID: 4900183470398811568}
   - component: {fileID: 8193887887001937884}
   - component: {fileID: 3495067459684435371}
-  - component: {fileID: 753559586929636729}
+  - component: {fileID: 3601801918460850512}
   m_Layer: 6
   m_Name: FL Wheel
   m_TagString: Untagged
@@ -1199,7 +1202,7 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 3115403135521669080, guid: 8582e09ba17ffc24e9510ec53a0eb071, type: 3}
---- !u!114 &753559586929636729
+--- !u!114 &3601801918460850512
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1208,10 +1211,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 6331010096238205175}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 588aad37e750b72438c46c421eba14fd, type: 3}
+  m_Script: {fileID: 11500000, guid: dc6b76f3b0ce4301a6ec67c2d984c535, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wheel: {fileID: 0}
+  wheelObject: {fileID: 0}
+  axle: 0
 --- !u!1 &6763983741683446268
 GameObject:
   m_ObjectHideFlags: 0
@@ -1284,7 +1288,7 @@ WheelCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_ProvidesContacts: 0
 --- !u!114 &1938383601309803115
 MonoBehaviour:
@@ -1404,7 +1408,7 @@ WheelCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_ProvidesContacts: 0
 --- !u!114 &2981216521273404852
 MonoBehaviour:

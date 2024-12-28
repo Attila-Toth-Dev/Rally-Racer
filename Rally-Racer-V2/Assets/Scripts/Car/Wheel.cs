@@ -1,26 +1,27 @@
 ﻿using System;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Car
 {
     [Serializable]
     public class Wheel : MonoBehaviour
     {
-        public WheelCollider WheelCollider
-        {
-            get => _wheelCollider;
-            set => _wheelCollider = value;
-        }
+        #region Getters/Setters
 
-        public GameObject wheelObject;
-        public Axle axle;
+        public GameObject WheelObject => wheelObject;
+        public Axle Axle => axle;
 
-        private WheelCollider _wheelCollider;
+        #endregion
+
+        [SerializeField] private Axle axle;
+
+        private GameObject wheelObject;
+        private MeshCollider wheelCollider;
 
         private void Awake()
         {
-            _wheelCollider = GetComponent<WheelCollider>();
+            wheelObject = gameObject;
+            wheelCollider = GetComponent<MeshCollider>();
         }
     }
 }

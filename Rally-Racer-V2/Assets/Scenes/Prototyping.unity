@@ -6455,13 +6455,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bronco
       objectReference: {fileID: 0}
+    - target: {fileID: 6349565725225356899, guid: eaa15d1368bc55947b639ef0d2ab573b, type: 3}
+      propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6349565725225356899, guid: eaa15d1368bc55947b639ef0d2ab573b, type: 3}
+      propertyPath: m_IsKinematic
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8714522710616007894, guid: eaa15d1368bc55947b639ef0d2ab573b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.4206446
       objectReference: {fileID: 0}
     - target: {fileID: 8714522710616007894, guid: eaa15d1368bc55947b639ef0d2ab573b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.8684082
+      value: 2.85
       objectReference: {fileID: 0}
     - target: {fileID: 8714522710616007894, guid: eaa15d1368bc55947b639ef0d2ab573b, type: 3}
       propertyPath: m_LocalPosition.z
