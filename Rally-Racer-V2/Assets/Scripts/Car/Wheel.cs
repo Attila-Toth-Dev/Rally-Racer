@@ -9,6 +9,7 @@ namespace Car
         #region Getters/Setters
 
         public GameObject WheelObject => wheelObject;
+        public MeshCollider WheelCollider => wheelCollider;
         public Axle Axle => axle;
 
         #endregion
