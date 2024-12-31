@@ -889,6 +889,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3917033095671641830}
+  - {fileID: 4679178332602008648}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &6349565725225356899
@@ -901,7 +902,7 @@ Rigidbody:
   serializedVersion: 4
   m_Mass: 1000
   m_Drag: 0.1
-  m_AngularDrag: 0.05
+  m_AngularDrag: 10
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -930,8 +931,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bd9af15ee52bd14abe75a7089ef5f37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  engineSpeed: 1000
-  drivetrain: 1
+  accelerationPoint: {fileID: 4679178332602008648}
+  carRb: {fileID: 6349565725225356899}
+  acceleration: 25
+  maxSpeed: 100
+  deceleration: 20
+  steerStrength: 50
+  steeringCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  dragCoefficient: 1
+  drivetrain: 2
   suspensionPoints:
   - {fileID: 6002666550204077392}
   - {fileID: 7789720724369473309}
@@ -942,9 +973,6 @@ MonoBehaviour:
   restLength: 1
   springTravel: 0.5
   wheelRadius: 0.33
-  drivableLayer:
-    serializedVersion: 2
-    m_Bits: 0
   wheels:
   - {fileID: 3601801918460850512}
   - {fileID: 1079093578876773709}
@@ -953,9 +981,10 @@ MonoBehaviour:
   movement: {fileID: 5490608077107416072, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   steer: {fileID: -2294826307933457120, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   handbrake: {fileID: -4994206891709873918, guid: 052faaac586de48259a63d0c4782560b, type: 3}
-  movementValue: 0
-  steerValue: 0
+  moveInput: 0
+  steerInput: 0
   isHandBraking: 0
+  isGrounded: 0
 --- !u!1 &6331010096238205175
 GameObject:
   m_ObjectHideFlags: 0
@@ -1111,6 +1140,37 @@ Transform:
   - {fileID: 6002666550204077392}
   - {fileID: 7789720724369473309}
   m_Father: {fileID: 3681521687706112334}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6851040287851338044
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4679178332602008648}
+  m_Layer: 0
+  m_Name: Acceleration Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4679178332602008648
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6851040287851338044}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8714522710616007894}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8992433214282902275
 GameObject:
